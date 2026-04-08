@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -4934782783493571090
     second: UI-Block-L_0
+  - first:
+      213: -4229196596252925628
+    second: UI-Block-L_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -117,11 +120,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
+        y: 0
         width: 675
-        height: 469
+        height: 475
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +141,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: bdf4fcae56563514da33546bacd87ce2
     internalID: 0
     vertices: []
     indices: 
@@ -149,6 +152,9 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       UI-Block-L_0: -4934782783493571090
+      UI-Block-L_1: -4229196596252925628
+      UI-Block-L_2: 1500128767
+      UI-Block-L_3: 97809285
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

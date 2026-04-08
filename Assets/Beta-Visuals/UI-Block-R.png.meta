@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -5005986715604124216
     second: UI-Block-R_0
+  - first:
+      213: -2417268320245474117
+    second: UI-Block-R_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI-Block-R_0
+      name: UI-Block-R_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
+        y: 0
         width: 675
-        height: 469
+        height: 475
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8cd7712ea99278ab0800000000000000
-      internalID: -5005986715604124216
+      spriteID: bbc96fc1543247ed0800000000000000
+      internalID: -2417268320245474117
       vertices: []
       indices: 
       edges: []
@@ -138,7 +141,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ed10c6e39db88564f9f25d6389ec837e
     internalID: 0
     vertices: []
     indices: 
@@ -149,6 +152,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       UI-Block-R_0: -5005986715604124216
+      UI-Block-R_1: -2417268320245474117
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
