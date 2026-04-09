@@ -493,7 +493,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1235866346}
   - component: {fileID: 1235866345}
-  - component: {fileID: 1235866347}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -513,11 +512,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fa3b5239595344fade4f3bb6cf295e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
-  hm: {fileID: 1235866347}
   Plushes:
   - {fileID: 994363034020297892, guid: 710599af87066ef4d80025cdab10d8de, type: 3}
   Player: 0
-  Health: 0
   Defense: 0
   Power: 0
   Speed: 0
@@ -566,29 +563,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1235866347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235866344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154b44426f3e6eb4598357043fe2eecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HeartManager
-  Hearts:
-  - {fileID: 2099663051}
-  - {fileID: 1684822809}
-  - {fileID: 1796244745}
-  - {fileID: 1534985114}
-  HeartStates:
-  - {fileID: 1333779756137130613, guid: 52176eac9a0195a4aa94a53f16d0a8ae, type: 3}
-  - {fileID: 4325548095697619537, guid: c94eab76d049bdf4b819b7858e5d19fc, type: 3}
-  - {fileID: -2824722896780326406, guid: c8f2fb8e27957b746b3ff1be5a6dc128, type: 3}
-  - {fileID: 2126338804729252409, guid: f9b480db279f79542bd83da4f2985b98, type: 3}
-  - {fileID: -623212079524696433, guid: 6983b59f34ff1ea4e881db7e12c3cc0f, type: 3}
 --- !u!1 &1458566716
 GameObject:
   m_ObjectHideFlags: 0

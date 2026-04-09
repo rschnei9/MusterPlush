@@ -1,10 +1,15 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BattleManager : MonoBehaviour
 {
+//REFERENCES
+public HeartManager hm;
 //THESE VARIABLES ARE FOR THE PLAYER
+[Header("Player Management")]
 public GameObject [] Plushes;
     public float Player;
+    public int Health;
 
     public float Defense;
     public float Power;
@@ -19,7 +24,8 @@ public GameObject [] Plushes;
     public float ConditionTimer;
 
 //THESE VARIABLES ARE FOR THE ENEMY
-public GameObject [] Enemies;
+[Header("Enemy Management")]
+public List<GameObject> Enemies;
     public float Enemy;
 
     public float EDefense;
@@ -43,24 +49,50 @@ public GameObject [] Enemies;
     public float ButtonC;
     public float ButtonD;
 
-    public float MoveA;
-    public float MoveB;
-    public float MoveC;
-    public float MoveD;
-    public float MoveE;
-    public float MoveF;
-    public float MoveG;
-    public float MoveH;
-    public float MoveI;
-    public float MoveJ;
-
     void Start()
     {
-        
+        Health = 16;
+        Summon();
+        hm.UpdateHearts(Health);
     }
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Destruction();
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Summon();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            hm.UpdateHearts(Health);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {Health -= 1;}
+        if (Input.GetKeyDown(KeyCode.D))
+        {Health += 1;}
+    }
+
+    void Summon()
+    {
+        Instantiate(Enemies[Random.Range(0,Enemies.Count)],transform);
+        Instantiate(Plushes[0],transform);
+
+        Instantiate(Buttons[0],transform);
+        Instantiate(Buttons[1],transform);
+        Instantiate(Buttons[2],transform);
+        Instantiate(Buttons[3],transform);
+    }
+
+    void Destruction()
+    {
+        Debug.Log("Battle Manager Cleared");
+        for (int i=0; i<transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
     }
 }
