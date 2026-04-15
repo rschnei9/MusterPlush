@@ -94,8 +94,8 @@ public List<GameObject> Enemies;
         //}
 
         {
-            TestA = pstat.PlayerPower;
-            TestB = estat.EnemySpeed;
+            //TestA = pstat.PlayerPower;
+            //TestB = estat.EnemySpeed;
         }
 
         TurnEnd();
