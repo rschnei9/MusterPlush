@@ -40,10 +40,15 @@ public class BattleManager : MonoBehaviour
 
     //THESE ARE FOR CALCULATIONS
     [Header("Calculator Stuff")]
-    public int Damage;
+    public float Damage;
 
     void Start()
     {
+        ButtonA = 0;
+        ButtonB = 1;
+        ButtonC = 2;
+        ButtonD = 3;
+
         MenuSummon = true;
         Health = 16;
         pstat = GetComponent<PlayerStats>();
@@ -69,6 +74,15 @@ public class BattleManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
             TurnStart();
+
+        if (Input.GetKeyDown(KeyCode.Q) && MenuSummon == true)
+        {
+            PlayerMove1();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && MenuSummon == true)
+        {
+            EnemyMove1();
+        }
     }
 
     void TurnStart()
@@ -119,10 +133,10 @@ public class BattleManager : MonoBehaviour
         //Player summon
         Instantiate(Plushes[0], transform);
 
-        Instantiate(Buttons[0], transform);
-        Instantiate(Buttons[1], transform);
-        Instantiate(Buttons[2], transform);
-        Instantiate(Buttons[3], transform);
+        Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
+        Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
+        Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
+        Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
         hm.UpdateHearts(Health);
     }
 
@@ -134,5 +148,29 @@ public class BattleManager : MonoBehaviour
         {
             Destroy(transform.GetChild(i).gameObject);
         }
+    }
+
+    void PlayerMove1()
+    {
+        Damage = pstat.Power - estat.Defense;
+        if (Damage < 0)
+        {
+            Damage = 0;
+        }
+        estat.Health = estat.Health - Damage;
+        Debug.Log("Enemy took" + Damage + "damage");
+        Damage = 0;
+    }
+
+    void EnemyMove1()
+    {
+        Damage = estat.Power - pstat.Defense;
+        if (Damage < 0)
+        {
+            Damage = 0;
+        }
+        Health = Health - (int) Damage;
+        Debug.Log("Player took" + Damage + "damage");
+        Damage = 0;
     }
 }

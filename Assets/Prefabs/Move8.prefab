@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4597474208289153268}
   - component: {fileID: 109435082249486356}
   m_Layer: 0
-  m_Name: Move4
+  m_Name: Move8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 9218029996158135329, guid: 7dbdbfe160c47904ab7a38f4b0efe5ef, type: 3}
-  m_Color: {r: 0.109127805, g: 0.14059924, b: 0.4415095, a: 1}
+  m_Color: {r: 0.83396226, g: 0.39495188, b: 0.41880578, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
