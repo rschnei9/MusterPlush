@@ -4,15 +4,15 @@ public class PlayerStats : MonoBehaviour
 {
     public bool PlushSelect;
 
-    public float PlayerPower;
-    public float PlayerDefense;
-    public float PlayerSpeed;
+    public float Power;
+    public float Defense;
+    public float Speed;
 
     void Start()
     {
-        PlayerPower = 0;
-        PlayerDefense = 0;
-        PlayerSpeed = 0;
+        Power = 0;
+        Defense = 0;
+        Speed = 0;
         PlushSelect = true;
     }
 
@@ -22,25 +22,25 @@ public class PlayerStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             PlushSelect = false;
-            PlayerPower = 3;
-            PlayerDefense = 1;
-            PlayerSpeed = 4;
+            Power = 3;
+            Defense = 1;
+            Speed = 4;
         }
         //Bear Selected
         if (Input.GetKeyDown(KeyCode.O))
         {
             PlushSelect = false;
-            PlayerPower = 3;
-            PlayerDefense = 4;
-            PlayerSpeed = 1;
+            Power = 3;
+            Defense = 4;
+            Speed = 1;
         }
         //Bunny Selected
         if (Input.GetKeyDown(KeyCode.P))
         {
             PlushSelect = false;
-            PlayerPower = 2;
-            PlayerDefense = 3;
-            PlayerSpeed = 3;
+            Power = 2;
+            Defense = 3;
+            Speed = 3;
         }
     }
 }

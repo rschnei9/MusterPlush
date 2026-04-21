@@ -3,53 +3,50 @@ using System.Collections.Generic;
 
 public class BattleManager : MonoBehaviour
 {
-//REFERENCES
-public HeartManager hm;
+    //REFERENCES
+    public HeartManager hm;
 
-private PlayerStats pstat;
-private EnemyStats estat;
+    private PlayerStats pstat;
+    private EnemyStats estat;
 
-public GameObject PlayerManager;
-public GameObject EnemyManager;
+    public GameObject PlayerManager;
+    public GameObject EnemyManager;
 
-//THESE VARIABLES ARE FOR THE PLAYER
-[Header("Player Management")]
-public GameObject [] Plushes;
+    //THESE VARIABLES ARE FOR THE PLAYER
+    [Header("Player Management")]
+    public GameObject[] Plushes;
     public float Player;
     public int Health;
 
-//THESE VARIABLES ARE FOR THE ENEMY
-[Header("Enemy Management")]
-public List<GameObject> Enemies;
+    //THESE VARIABLES ARE FOR THE ENEMY
+    [Header("Enemy Management")]
+    public List<GameObject> Enemies;
     public float Enemy;
 
-//THESE ARE FOR THE UI
-[Header("User Interface")]
-    public GameObject [] Buttons;
+    //THESE ARE FOR THE UI
+    [Header("User Interface")]
+    public GameObject[] Buttons;
     public bool Select;
 
-    public float ButtonA;
-    public float ButtonB;
-    public float ButtonC;
-    public float ButtonD;
+    public int ButtonA;
+    public int ButtonB;
+    public int ButtonC;
+    public int ButtonD;
 
     public bool MenuSummon;
 
-//THESE ARE FOR GAME LOGIC
+    //THESE ARE FOR GAME LOGIC
     public bool SpeedTie;
 
-//THESE ARE FOR CALCULATIONS
-[Header("Calculator Stuff")]
+    //THESE ARE FOR CALCULATIONS
+    [Header("Calculator Stuff")]
     public int Damage;
 
     void Start()
     {
         MenuSummon = true;
         Health = 16;
-        PlayerManager = GameObject.Find("BattleManager");
-        pstat = PlayerManager.GetComponent<PlayerStats>();
-        EnemyManager = GameObject.Find("BattleManager");
-        estat = EnemyManager.GetComponent<EnemyStats>();
+        pstat = GetComponent<PlayerStats>();
         Summon();
     }
 
@@ -64,61 +61,68 @@ public List<GameObject> Enemies;
             Summon();
         }
         if (Input.GetKeyDown(KeyCode.A))
-        {Health -= 1;}
+        { Health -= 1; }
         if (Input.GetKeyDown(KeyCode.D))
-        {Health += 1;}
+        { Health += 1; }
 
         hm.UpdateHearts(Health);
 
         if (Input.GetKeyDown(KeyCode.F))
-        TurnStart();
+            TurnStart();
     }
 
     void TurnStart()
     {
-        //Speed Tied to start
-        // if (Speed == ESpeed)
-        //{
-        // Speed += 1;
-        // SpeedTie = true;
-        //}
-        //Player is faster
-        //else if (Speed > ESpeed)
-        //{
-        // Damage = (int)(Power - EDefense);
-        //}
-        //Enemy is faster
-        // else if (Speed < ESpeed)
-        //{
-        // Damage = (int)(EPower - Defense);
-        //}
-
-        {
-            //TestA = pstat.PlayerPower;
-            //TestB = estat.EnemySpeed;
+        if (pstat.Speed == estat.Speed)
+        { 
+            Debug.Log("Speed Tied!"); 
+            int flipcoin = Random.Range(0,2);
+            if (flipcoin == 0)
+            {
+                Debug.Log("Player First!");
+            }
+            if (flipcoin == 1)
+            {
+                Debug.Log("Enemy First!");
+            }
         }
 
+        if (pstat.Speed > estat.Speed)
+        {
+            Debug.Log("Player First!");
+        }
+        if (pstat.Speed < estat.Speed)
+        {
+            Debug.Log("Enemy First!");
+        }
+        TurnMiddle();
+    }
+
+    void TurnMiddle()
+    {
+        Debug.Log("Middle of turn");
         TurnEnd();
     }
 
     void TurnEnd()
     {
-        if (SpeedTie)
-        {
-            // Speed -= 1;
-        }
+        Debug.Log("End of turn");
     }
 
     void Summon()
     {
         MenuSummon = true;
-        Instantiate(Enemies[Random.Range(0,Enemies.Count)],transform);
-        Instantiate(Plushes[0],transform);
+        //This summons the enemy on scene, EnemyManager is assigned "e" stats
+        EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
+        estat = EnemyManager.GetComponent<EnemyStats>();
 
-        Instantiate(Buttons[0],transform);
-        Instantiate(Buttons[1],transform);
-        Instantiate(Buttons[2],transform);
-        Instantiate(Buttons[3],transform);
+        //Player summon
+        Instantiate(Plushes[0], transform);
+
+        Instantiate(Buttons[0], transform);
+        Instantiate(Buttons[1], transform);
+        Instantiate(Buttons[2], transform);
+        Instantiate(Buttons[3], transform);
         hm.UpdateHearts(Health);
     }
 
@@ -126,7 +130,7 @@ public List<GameObject> Enemies;
     {
         MenuSummon = false;
         Debug.Log("Battle Manager Cleared");
-        for (int i=0; i<transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             Destroy(transform.GetChild(i).gameObject);
         }

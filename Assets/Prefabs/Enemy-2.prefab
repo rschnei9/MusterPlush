@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1873673819350457272}
   - component: {fileID: 590631694832420233}
   m_Layer: 0
-  m_Name: Enemy-1
+  m_Name: Enemy-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -614730405048433241, guid: 06ce47e4431caa743953f9aca9ff2dcf, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.030978873, g: 0.86415094, b: 0.3047536, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,6 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   Select: 0
-  Power: 3
+  Power: 2
   Defense: 2
-  Speed: 1
+  Speed: 2
