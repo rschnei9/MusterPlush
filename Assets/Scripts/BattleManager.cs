@@ -103,25 +103,25 @@ public class BattleManager : MonoBehaviour
         hm.UpdateHearts(Health);
 
         //MOVE SELECTION
-        if (Input.GetKeyDown(KeyCode.Alpha1) && MenuSummon == true)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
         {
             MenuSummon = false;
             MoveABCD = ButtonA;
             StartCoroutine("TurnStart");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && MenuSummon == true)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
         {
             MenuSummon = false;
             MoveABCD = ButtonB;
             StartCoroutine("TurnStart");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && MenuSummon == true)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
         {
             MenuSummon = false;
             MoveABCD = ButtonC;
             StartCoroutine("TurnStart");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && MenuSummon == true)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
         {
             MenuSummon = false;
             MoveABCD = ButtonD;
