@@ -6,6 +6,7 @@ public class EnemyStats : MonoBehaviour
     public float Defense;
     public float Speed;
     public float Health;
+    public bool EnemyDefeat;
 
     void Start()
     {
@@ -14,6 +15,9 @@ public class EnemyStats : MonoBehaviour
 
     void Update()
     {
-
+        if (Health <= 0)
+        {
+            EnemyDefeat = true;
+        }
     }
 }
