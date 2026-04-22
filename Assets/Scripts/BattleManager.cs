@@ -42,6 +42,7 @@ public class BattleManager : MonoBehaviour
     public int EnemyABC;
 
     public bool MenuSummon;
+    public bool MenuSelect;
 
     //THESE ARE FOR GAME LOGIC
     public bool SpeedTie;
@@ -65,18 +66,19 @@ public class BattleManager : MonoBehaviour
 
         Defeat = false;
         MenuSummon = true;
+        MenuSelect = true;
         Health = 16;
         pstat = GetComponent<PlayerStats>();
         Summon();
+        MenuStart();
     }
 
     void Update()
     {
         //ACTIVE MODIFIERS
         if (Health >= 16)
-        {
-            Health = 16;
-        }
+            {Health = 16;}
+
         if (Health <= 0 && Defeat == false)
         {
             Health = 0;
@@ -84,47 +86,24 @@ public class BattleManager : MonoBehaviour
             Debug.Log("Player Defeated");
             Destruction();
         }
-
         //TEMPORARY TEST FUNCTIONS
-        if (Input.GetKeyDown(KeyCode.Z) && MenuSummon == true)
-        {
-            Destruction();
-        }
-        if (Input.GetKeyDown(KeyCode.X) && MenuSummon == false)
-        {
-            Summon();
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        { Health -= 1; }
-        if (Input.GetKeyDown(KeyCode.D))
-        { Health += 1; }
-
+        if (Input.GetKeyDown(KeyCode.Z) && MenuSummon == true) {Destruction();}
+        if (Input.GetKeyDown(KeyCode.X) && MenuSummon == false) {Summon();}
+        if (Input.GetKeyDown(KeyCode.Y)) { Health -= 1; }
+        if (Input.GetKeyDown(KeyCode.U)) { Health += 1; }
         //UI INDICATORS
         hm.UpdateHearts(Health);
 
+        //MOVE SLIDER UI
+            if (Input.GetKeyDown(KeyCode.D) && MenuSelect == true)
+                {SelectMoveL();}
+            if (Input.GetKeyDown(KeyCode.A) && MenuSelect == true)
+                {SelectMoveR();}
+            
         //MOVE SELECTION
-        if (Input.GetKeyDown(KeyCode.Alpha1) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
+        if (Input.GetKeyDown(KeyCode.E) && MenuSelect == true && Defeat == false && estat.EnemyDefeat == false)
         {
-            MenuSummon = false;
-            MoveABCD = ButtonA;
-            StartCoroutine("TurnStart");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
-        {
-            MenuSummon = false;
-            MoveABCD = ButtonB;
-            StartCoroutine("TurnStart");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
-        {
-            MenuSummon = false;
-            MoveABCD = ButtonC;
-            StartCoroutine("TurnStart");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && MenuSummon == true && Defeat == false && estat.EnemyDefeat == false)
-        {
-            MenuSummon = false;
-            MoveABCD = ButtonD;
+            MenuSelect = false;
             StartCoroutine("TurnStart");
         }
     }
@@ -136,119 +115,79 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         StartCoroutine("TurnSpeed");
     }
-
     public IEnumerator TurnSpeed()
     {
         if (pstat.Speed == estat.Speed)
-        { 
-            Debug.Log("Speed Tied!"); 
-            int flipcoin = Random.Range(0,2);
+        {
+            Debug.Log("Speed Tied!"); int flipcoin = Random.Range(0,2);
+
             if (flipcoin == 0)
-            {
-                PlayerMove = true;
-                Debug.Log("Player First!");
-            }
+                {PlayerMove = true; Debug.Log("Player First!");}
             if (flipcoin == 1)
-            {
-                EnemyMove = true;
-                Debug.Log("Enemy First!");
-            }
+                {EnemyMove = true; Debug.Log("Enemy First!");}
         }
-
         if (pstat.Speed > estat.Speed)
-        {
-            PlayerMove = true;
-            Debug.Log("Player First!");
-        }
+            {PlayerMove = true; Debug.Log("Player First!");}
         if (pstat.Speed < estat.Speed)
-        {
-            EnemyMove = true;
-            Debug.Log("Enemy First!");
-        }
-        else
-        yield return new WaitForSeconds(0.15f);
-        Debug.Log("End of Speed Check");
-        FirstTurn = true;
-        yield return new WaitForSeconds(0.15f);
-        StartCoroutine("TurnOne");
-    }
+            {EnemyMove = true; Debug.Log("Enemy First!");}
 
+        else
+            yield return new WaitForSeconds(0.15f);
+            Debug.Log("End of Speed Check");
+            FirstTurn = true;
+            yield return new WaitForSeconds(0.15f);
+            StartCoroutine("TurnOne");
+    }
     public IEnumerator TurnOne()
     {
         if (FirstTurn = true && PlayerMove == true && Defeat == false && estat.EnemyDefeat == false)
-        {
-            PlayerMovePlan();
-        }
-
+            {PlayerMovePlan();}
         if (FirstTurn = true && EnemyMove == true && Defeat == false && estat.EnemyDefeat == false)
-        {
-            EnemyMovePlan();
-        }
-            yield return new WaitForSeconds(0.15f);
-            FirstTurn = false; SecondTurn = true;
-            StartCoroutine("TurnTwo");
+            {EnemyMovePlan();}
+
+                yield return new WaitForSeconds(0.15f);
+                FirstTurn = false; SecondTurn = true;
+                StartCoroutine("TurnTwo");
     }
     public IEnumerator TurnTwo()
     {
         if (SecondTurn = true && PlayerMove == false && Defeat == false && estat.EnemyDefeat == false)
-        {
-            PlayerMovePlan();
-        }
-
+            {PlayerMovePlan();}
         if (SecondTurn = true && EnemyMove == false && Defeat == false && estat.EnemyDefeat == false)
-        {
-            EnemyMovePlan();
-        }
-            yield return new WaitForSeconds(0.15f);
-            SecondTurn = false;
-            StartCoroutine("TurnEnd");
-    }
+            {EnemyMovePlan();}
 
+                yield return new WaitForSeconds(0.15f);
+                SecondTurn = false;
+                StartCoroutine("TurnEnd");
+    }
     public IEnumerator TurnEnd()
     {
-        MenuSummon = true;
-        MoveABCD = 0;
         yield return new WaitForSeconds(0.15f);
+        MenuStart();
         Debug.Log("End of turn");
     }
-
-    //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
-
-    void Summon()
+    void MenuStart()
     {
         MenuSummon = true;
-        //This summons the enemy on scene, EnemyManager is assigned "e" stats
-        EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
-        estat = EnemyManager.GetComponent<EnemyStats>();
-
-        //Player summon
-        Instantiate(Plushes[0], transform);
-
-        Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
-        Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
-        Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
-        Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
-
-        Instantiate(Hearts[0], transform);
-        Instantiate(Hearts[1], transform);
-        Instantiate(Hearts[2], transform);
-        Instantiate(Hearts[3], transform);
-
-        hm.UpdateHearts(Health);
+        Debug.Log("Started Hovering Button A"); MoveABCD = ButtonA;
+        MenuSelect = true;
     }
 
-    void Destruction()
+    void SelectMoveL()
     {
-        MenuSummon = false;
-        Debug.Log("Battle Manager Cleared");
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject);
-        }
+                if (MoveABCD == ButtonB) {Debug.Log("Hovering Button A"); MoveABCD = ButtonA;}
+                else if (MoveABCD == ButtonC) {Debug.Log("Hovering Button B"); MoveABCD = ButtonB;}
+                else if (MoveABCD == ButtonD) {Debug.Log("Hovering Button C"); MoveABCD = ButtonC;}
+                else if (MoveABCD == ButtonA) {Debug.Log("Hovering Button D"); MoveABCD = ButtonD;}
     }
-
-    //THESE CONTAIN ALL OF THE POSSIBLE MOVES IN THE ENTIRE GAME!!!!
-
+    void SelectMoveR()
+    {
+                if (MoveABCD == ButtonD) {Debug.Log("Hovering Button A"); MoveABCD = ButtonA;}
+                else if (MoveABCD == ButtonA) {Debug.Log("Hovering Button B"); MoveABCD = ButtonB;}
+                else if (MoveABCD == ButtonB) {Debug.Log("Hovering Button C"); MoveABCD = ButtonC;}
+                else if (MoveABCD == ButtonC) {Debug.Log("Hovering Button D"); MoveABCD = ButtonD;}
+    }
+//EVERY POSSIBLE MOVE!
     void PlayerMovePlan()
     {
         if (MoveABCD == 0)
@@ -308,5 +247,33 @@ public class BattleManager : MonoBehaviour
     //DOOM, MUAHAHAHAHHAHAHHAHHAHAHAHAHAHAHAHAHAHAAHAHHAHAHAHA!
 
 
+    //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
+    void Summon()
+    {
+        MenuSummon = true;
+        //This summons the enemy on scene, EnemyManager is assigned "e" stats
+        EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
+        estat = EnemyManager.GetComponent<EnemyStats>();
+        //Player summon
+        Instantiate(Plushes[0], transform);
+        //Button Summons
+        Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
+        Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
+        Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
+        Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
+        //Heart Summons (broken)
+        //Instantiate(Hearts[0], transform);
+        //Instantiate(Hearts[1], transform);
+        //Instantiate(Hearts[2], transform);
+        //Instantiate(Hearts[3], transform);
+        hm.UpdateHearts(Health);
+    }
 
+    void Destruction()
+    {
+        MenuSummon = false;
+            Debug.Log("Battle Manager Cleared");
+        for (int i = 0; i < transform.childCount; i++)
+            {Destroy(transform.GetChild(i).gameObject);}
+    }
 }
