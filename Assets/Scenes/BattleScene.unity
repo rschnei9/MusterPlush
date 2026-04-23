@@ -346,7 +346,7 @@ SpriteRenderer:
   m_Size: {x: 1.13, y: 1.11}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &945148389
 Transform:
@@ -585,7 +585,7 @@ SpriteRenderer:
   m_Size: {x: 1.17, y: 1.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1064124185
 Transform:
@@ -643,6 +643,8 @@ MonoBehaviour:
   EnemyManager: {fileID: 0}
   Plushes:
   - {fileID: 994363034020297892, guid: 710599af87066ef4d80025cdab10d8de, type: 3}
+  - {fileID: 994363034020297892, guid: 562ce98596915474f9e7fa2019bcc80a, type: 3}
+  - {fileID: 994363034020297892, guid: 59a0d69cf2e40984dab90131c5670d0e, type: 3}
   Player: 0
   Health: 0
   Enemies:
@@ -722,11 +724,11 @@ MonoBehaviour:
   - {fileID: 815491528}
   - {fileID: 1830848620}
   HeartStates:
-  - {fileID: -6560602106294614503, guid: 74fee0b3294624a4db5ab6eaa0591bc9, type: 3}
-  - {fileID: -107649609528648016, guid: a8cbde5f0bb587a44a90d3c20dfe40e5, type: 3}
-  - {fileID: -5645638364839585147, guid: d2db59cd1e24f64468b5e8b6da375ed4, type: 3}
-  - {fileID: 7539794635076240272, guid: 9ea591e6b68f7c540b788a5a10a21a4b, type: 3}
-  - {fileID: 8105112338272431932, guid: 40862f27691861e49b9ede99541df77b, type: 3}
+  - {fileID: -6560602106294614503, guid: a691f8bec5b18894b8643ee6ad6d3a73, type: 3}
+  - {fileID: -107649609528648016, guid: 9357e083d518fd44ca48758b06eddd9d, type: 3}
+  - {fileID: -5645638364839585147, guid: fa8055d871ee5a146941b116c8ecab27, type: 3}
+  - {fileID: 7539794635076240272, guid: b79a3d80a5ca3e6498a5260c54938071, type: 3}
+  - {fileID: 8105112338272431932, guid: e1bd1f6110088884c94fdc1912716b56, type: 3}
 --- !u!114 &1235866348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,9 +742,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   PlushSelect: 0
+  BASEPower: 0
+  BASEDefense: 0
+  BASESpeed: 0
   Power: 0
   Defense: 0
   Speed: 0
+  PlushChoice: 0
+  PowerU: 0
+  TimePowerU: 0
+  DefenseU: 0
+  TimeDefenseU: 0
+  SpeedU: 0
+  TimeSpeedU: 0
 --- !u!1001 &1295125138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1027,7 +1039,7 @@ SpriteRenderer:
   m_Size: {x: 1.13, y: 1.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1543748253
 Transform:

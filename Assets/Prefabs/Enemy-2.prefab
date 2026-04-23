@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -614730405048433241, guid: 06ce47e4431caa743953f9aca9ff2dcf, type: 3}
-  m_Color: {r: 0.064758025, g: 0.6830188, b: 0.009020967, a: 1}
+  m_Sprite: {fileID: 7723652632321733531, guid: 22f3c4af593def5438ceb142d6e77721, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,3 +107,5 @@ MonoBehaviour:
   Power: 2
   Defense: 2
   Speed: 2
+  Health: 0
+  EnemyDefeat: 0

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 40862f27691861e49b9ede99541df77b
+guid: aef07a77b88e02a4896db89ceb81a0ce
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8105112338272431932
-    second: 4Heart_0
+      213: 8059542398596239895
+    second: Plush-C1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 4Heart_0
+      name: Plush-C1_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 8
-        width: 113
-        height: 104
+        x: 80
+        y: 7
+        width: 344
+        height: 466
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3f2d5b9ab42b7070800000000000000
-      internalID: 8105112338272431932
+      spriteID: 71257883c1f39df60800000000000000
+      internalID: 8059542398596239895
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      4Heart_0: 8105112338272431932
+      Plush-C1_0: 8059542398596239895
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

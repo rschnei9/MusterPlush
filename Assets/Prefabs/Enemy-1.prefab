@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -614730405048433241, guid: 06ce47e4431caa743953f9aca9ff2dcf, type: 3}
+  m_Sprite: {fileID: 5830694933855508796, guid: 2157ba6084ef2c94fb6066e7c1cc5459, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede34a8bbbd9bd549b7eaf202074bbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  Select: 0
   Power: 3
   Defense: 2
   Speed: 1
+  Health: 0
+  EnemyDefeat: 0

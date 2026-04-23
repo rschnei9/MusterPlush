@@ -201,6 +201,7 @@ public class BattleManager : MonoBehaviour
         if (MoveABCD == 1)
         {
             Debug.Log("Player Move 2");
+            pstat.PowerU = true;
         }
         if (MoveABCD == 2)
         {
@@ -250,12 +251,13 @@ public class BattleManager : MonoBehaviour
     //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
     void Summon()
     {
+        pstat.PlushSelect = false;
         MenuSummon = true;
         //This summons the enemy on scene, EnemyManager is assigned "e" stats
         EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
         estat = EnemyManager.GetComponent<EnemyStats>();
         //Player summon
-        Instantiate(Plushes[0], transform);
+        Instantiate(Plushes[pstat.PlushChoice], transform);
         //Button Summons
         Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
         Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
@@ -271,6 +273,7 @@ public class BattleManager : MonoBehaviour
 
     void Destruction()
     {
+        pstat.PlushSelect = true;
         MenuSummon = false;
             Debug.Log("Battle Manager Cleared");
         for (int i = 0; i < transform.childCount; i++)
