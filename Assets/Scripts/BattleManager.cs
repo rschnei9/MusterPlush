@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour
     [Header("Enemy Management")]
     public List<GameObject> Enemies;
     public float Enemy;
+    public int EnemyChoice;
 
     //THESE ARE FOR THE UI
     [Header("User Interface")]
@@ -65,12 +66,10 @@ public class BattleManager : MonoBehaviour
         ButtonD = 3;
 
         Defeat = false;
-        MenuSummon = true;
+        MenuSummon = false;
         MenuSelect = true;
         Health = 16;
         pstat = GetComponent<PlayerStats>();
-        Summon();
-        MenuStart();
     }
 
     void Update()
@@ -96,9 +95,9 @@ public class BattleManager : MonoBehaviour
 
         //MOVE SLIDER UI
             if (Input.GetKeyDown(KeyCode.D) && MenuSelect == true)
-                {SelectMoveL();}
-            if (Input.GetKeyDown(KeyCode.A) && MenuSelect == true)
                 {SelectMoveR();}
+            if (Input.GetKeyDown(KeyCode.A) && MenuSelect == true)
+                {SelectMoveL();}
             
         //MOVE SELECTION
         if (Input.GetKeyDown(KeyCode.E) && MenuSelect == true && Defeat == false && estat.EnemyDefeat == false)
@@ -143,7 +142,13 @@ public class BattleManager : MonoBehaviour
         if (FirstTurn = true && PlayerMove == true && Defeat == false && estat.EnemyDefeat == false)
             {PlayerMovePlan();}
         if (FirstTurn = true && EnemyMove == true && Defeat == false && estat.EnemyDefeat == false)
-            {EnemyMovePlan();}
+            {
+                EnemyChoice = Random.Range(1,12);
+                if (EnemyChoice <= 7){EnemyChoice = estat.EnemyMoveA;}
+                if (EnemyChoice >= 8 && EnemyChoice <= 10){EnemyChoice = estat.EnemyMoveB;}
+                if (EnemyChoice >= 11 && EnemyChoice <= 12){EnemyChoice = estat.EnemyMoveC;}
+                EnemyMovePlan();
+            }
 
                 yield return new WaitForSeconds(0.15f);
                 FirstTurn = false; SecondTurn = true;
@@ -154,7 +159,13 @@ public class BattleManager : MonoBehaviour
         if (SecondTurn = true && PlayerMove == false && Defeat == false && estat.EnemyDefeat == false)
             {PlayerMovePlan();}
         if (SecondTurn = true && EnemyMove == false && Defeat == false && estat.EnemyDefeat == false)
-            {EnemyMovePlan();}
+            {
+                EnemyChoice = Random.Range(1,12);
+                if (EnemyChoice <= 7){EnemyChoice = estat.EnemyMoveA;}
+                if (EnemyChoice >= 8 && EnemyChoice <= 10){EnemyChoice = estat.EnemyMoveB;}
+                if (EnemyChoice >= 11 && EnemyChoice <= 12){EnemyChoice = estat.EnemyMoveC;}
+                EnemyMovePlan();
+            }
 
                 yield return new WaitForSeconds(0.15f);
                 SecondTurn = false;
@@ -162,6 +173,7 @@ public class BattleManager : MonoBehaviour
     }
     public IEnumerator TurnEnd()
     {
+        pstat.TurnEnd = true;
         yield return new WaitForSeconds(0.15f);
         MenuStart();
         Debug.Log("End of turn");
@@ -194,6 +206,7 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("Player Move 1");
             Damage = pstat.Power - estat.Defense/2;
+            if (Damage <= 0){Damage = 0;}
             estat.Health = estat.Health - Damage;
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
@@ -206,10 +219,12 @@ public class BattleManager : MonoBehaviour
         if (MoveABCD == 2)
         {
             Debug.Log("Player Move 3");
+            pstat.DefenseU = true;
         }
         if (MoveABCD == 3)
         {
             Debug.Log("Player Move 4");
+            pstat.SpeedU = true;
         }
         if (MoveABCD == 4)
         {
@@ -239,10 +254,57 @@ public class BattleManager : MonoBehaviour
 
     void EnemyMovePlan()
     {
-        Damage = estat.Power - pstat.Defense/2;
-        Health = Health - (int) Damage;
-        Debug.Log("Player took" + Damage + "damage");
-        Damage = 0;
+        if (EnemyChoice == 1)
+        {
+            Debug.Log("Enemy Move 1");
+            Damage = estat.Power - pstat.Defense/2;
+            if (Damage <= 0){Damage = 0;}
+            Health = Health - (int) Damage;
+            Debug.Log("Player took" + Damage + "damage");
+            Damage = 0;
+        }
+        if (EnemyChoice == 2)
+        {
+            Damage = estat.Power - pstat.Defense/2;
+            if (Damage <= 0){Damage = 0;}
+            Health = Health - (int) Damage;
+            Debug.Log("Player took" + Damage + "damage");
+            Damage = 0;
+            Debug.Log("Enemy Move 2");
+        }
+        if (EnemyChoice == 3)
+        {
+            Damage = estat.Power - pstat.Defense/2;
+            if (Damage <= 0){Damage = 0;}
+            Health = Health - (int) Damage;
+            Debug.Log("Player took" + Damage + "damage");
+            Damage = 0;
+            Debug.Log("Enemy Move 3");
+        }
+        if (EnemyChoice == 4)
+        {
+            Debug.Log("Enemy Move 4");
+        }
+        if (EnemyChoice == 5)
+        {
+            Debug.Log("Enemy Move 5");
+        }
+        if (EnemyChoice == 6)
+        {
+            Debug.Log("Enemy Move 6");
+        }
+        if (EnemyChoice == 7)
+        {
+            Debug.Log("Enemy Move 7");
+        }
+        if (EnemyChoice == 8)
+        {
+            Debug.Log("Enemy Move 8");
+        }
+        if (EnemyChoice == 9)
+        {
+            Debug.Log("Enemy Move 9");
+        }
     }
 
     //DOOM, MUAHAHAHAHHAHAHHAHHAHAHAHAHAHAHAHAHAHAAHAHHAHAHAHA!
@@ -251,8 +313,8 @@ public class BattleManager : MonoBehaviour
     //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
     void Summon()
     {
-        pstat.PlushSelect = false;
         MenuSummon = true;
+        pstat.PlushSelect = false;
         //This summons the enemy on scene, EnemyManager is assigned "e" stats
         EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
         estat = EnemyManager.GetComponent<EnemyStats>();
@@ -269,6 +331,7 @@ public class BattleManager : MonoBehaviour
         //Instantiate(Hearts[2], transform);
         //Instantiate(Hearts[3], transform);
         hm.UpdateHearts(Health);
+        MenuStart();
     }
 
     void Destruction()

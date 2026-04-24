@@ -8,9 +8,17 @@ public class EnemyStats : MonoBehaviour
     public float Health;
     public bool EnemyDefeat;
 
+    public int EnemyMoveA;
+    public int EnemyMoveB;
+    public int EnemyMoveC;
+
     void Start()
     {
-        Health = Random.Range(5,10);
+        Health = Random.Range(50,100);
+
+        EnemyMoveA = Random.Range(1,4);
+        EnemyMoveB = Random.Range(5,7);
+        EnemyMoveC = Random.Range(8,9);
     }
 
     void Update()
