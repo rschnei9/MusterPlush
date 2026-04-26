@@ -491,7 +491,13 @@ MonoBehaviour:
   - {fileID: 8271612996891215655, guid: 922a22e0ad543214c9aa99d9a721bbcc, type: 3}
   - {fileID: 5347402623050623435, guid: c80dcc86e45af7a4fb52f193108048d5, type: 3}
   - {fileID: 1899938730693936668, guid: 15cbf895c8e050946a23507bdad62be2, type: 3}
+  Screens:
+  - {fileID: 1129922474297343953, guid: 76489c68dce4da840af6b423e11e8d70, type: 3}
+  - {fileID: 7708522239462829508, guid: cc676096d31c861428b9f190e9850b20, type: 3}
+  - {fileID: 4861586549767284474, guid: 2f9036a3c5c95f24aa4af472704d4ea8, type: 3}
   Select: 0
+  BattleEnd: 0
+  Pause: 0
   ButtonA: 0
   ButtonB: 0
   ButtonC: 0
@@ -510,6 +516,7 @@ MonoBehaviour:
   FirstTurn: 0
   SecondTurn: 0
   Damage: 0
+  Chance: 0
 --- !u!4 &1235866346
 Transform:
   m_ObjectHideFlags: 0

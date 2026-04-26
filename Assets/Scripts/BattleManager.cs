@@ -29,7 +29,10 @@ public class BattleManager : MonoBehaviour
     [Header("User Interface")]
     public GameObject[] Buttons;
     public GameObject[] Hearts;
+    public GameObject[] Screens;
     public bool Select;
+    public bool BattleEnd;
+    public bool Pause;
 
     public int ButtonA;
     public int ButtonB;
@@ -57,6 +60,7 @@ public class BattleManager : MonoBehaviour
     //THESE ARE FOR CALCULATIONS
     [Header("Calculator Stuff")]
     public float Damage;
+    public int Chance;
 
     void Start()
     {
@@ -78,7 +82,7 @@ public class BattleManager : MonoBehaviour
         if (Health >= 16)
             {Health = 16;}
 
-        if (Health <= 0 && Defeat == false)
+        if (Health <= 0 && Defeat == false && BattleEnd == false)
         {
             Health = 0;
             Defeat = true;
@@ -132,13 +136,15 @@ public class BattleManager : MonoBehaviour
 
         else
             yield return new WaitForSeconds(0.15f);
-            Debug.Log("End of Speed Check");
+            //Debug.Log("End of Speed Check");
             FirstTurn = true;
             yield return new WaitForSeconds(0.15f);
             StartCoroutine("TurnOne");
     }
     public IEnumerator TurnOne()
     {
+        if (estat.EnemyDefeat == false || Defeat == false)
+        {
         if (FirstTurn = true && PlayerMove == true && Defeat == false && estat.EnemyDefeat == false)
             {PlayerMovePlan();}
         if (FirstTurn = true && EnemyMove == true && Defeat == false && estat.EnemyDefeat == false)
@@ -153,9 +159,14 @@ public class BattleManager : MonoBehaviour
                 yield return new WaitForSeconds(0.15f);
                 FirstTurn = false; SecondTurn = true;
                 StartCoroutine("TurnTwo");
+        }
+        else
+        StartCoroutine("TurnEnd");
     }
     public IEnumerator TurnTwo()
     {
+        if (estat.EnemyDefeat == false || Defeat == false)
+        {
         if (SecondTurn = true && PlayerMove == false && Defeat == false && estat.EnemyDefeat == false)
             {PlayerMovePlan();}
         if (SecondTurn = true && EnemyMove == false && Defeat == false && estat.EnemyDefeat == false)
@@ -170,21 +181,46 @@ public class BattleManager : MonoBehaviour
                 yield return new WaitForSeconds(0.15f);
                 SecondTurn = false;
                 StartCoroutine("TurnEnd");
+        }
+        else
+                StartCoroutine("TurnEnd");
     }
     public IEnumerator TurnEnd()
     {
-        pstat.TurnEnd = true;
-        yield return new WaitForSeconds(0.15f);
-        MenuStart();
-        Debug.Log("End of turn");
+        if (estat.EnemyDefeat == false || Defeat == false)
+        {
+            pstat.TurnEnd = true;
+            yield return new WaitForSeconds(0.15f);
+            MenuStart();
+            Debug.Log("End of turn");
+        }
+        if (estat.EnemyDefeat == true)
+        {
+            Instantiate(Screens[0], transform);
+            BattleEnd = true;
+            Debug.Log("Enemy is defeated, select new move!");
+            Destruction();
+            GainingMove();
+            estat.EnemyDefeat = false;
+        }
+        if (Defeat == true)
+        {
+            Instantiate(Screens[0], transform);
+            BattleEnd = true;
+            Debug.Log("Player loses the fight");
+            Destruction();
+            GameOver();
+            Defeat = false;
+        }
     }
     void MenuStart()
-    {
+        {
         MenuSummon = true;
         Debug.Log("Started Hovering Button A"); MoveABCD = ButtonA;
         MenuSelect = true;
-    }
+        }
 
+//MOVE SELECTION PROGRAM
     void SelectMoveL()
     {
                 if (MoveABCD == ButtonB) {Debug.Log("Hovering Button A"); MoveABCD = ButtonA;}
@@ -204,7 +240,7 @@ public class BattleManager : MonoBehaviour
     {
         if (MoveABCD == 0)
         {
-            Debug.Log("Player Move 1");
+            //Debug.Log("Player Move 1");
             Damage = pstat.Power - estat.Defense/2;
             if (Damage <= 0){Damage = 0;}
             estat.Health = estat.Health - Damage;
@@ -213,50 +249,53 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 1)
         {
-            Debug.Log("Player Move 2");
+            //Debug.Log("Player Move 2");
             pstat.PowerU = true;
         }
         if (MoveABCD == 2)
         {
-            Debug.Log("Player Move 3");
+            //Debug.Log("Player Move 3");
             pstat.DefenseU = true;
         }
         if (MoveABCD == 3)
         {
-            Debug.Log("Player Move 4");
+            //Debug.Log("Player Move 4");
             pstat.SpeedU = true;
         }
         if (MoveABCD == 4)
         {
-            Debug.Log("Player Move 5");
+            //Debug.Log("Player Move 5");
         }
         if (MoveABCD == 5)
         {
-            Debug.Log("Player Move 6");
+            //Debug.Log("Player Move 6");
         }
         if (MoveABCD == 6)
         {
-            Debug.Log("Player Move 7");
+            //Debug.Log("Player Move 7");
         }
         if (MoveABCD == 7)
         {
-            Debug.Log("Player Move 8");
+            //Debug.Log("Player Move 8");
         }
         if (MoveABCD == 8)
         {
-            Debug.Log("Player Move 9");
+            //Debug.Log("Player Move 9");
+            Health = Health + Random.Range(2,6);
         }
         if (MoveABCD == 9)
         {
-            Debug.Log("Player Move 10");
+            //Debug.Log("Player Move 10");
+            Health = Health + 5;
         }
     }
 
+//ENEMY MOVE SELECTION
     void EnemyMovePlan()
     {
         if (EnemyChoice == 1)
         {
-            Debug.Log("Enemy Move 1");
+            //Debug.Log("Enemy Move 1");
             Damage = estat.Power - pstat.Defense/2;
             if (Damage <= 0){Damage = 0;}
             Health = Health - (int) Damage;
@@ -265,21 +304,21 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 2)
         {
+            //Debug.Log("Enemy Move 2");
             Damage = estat.Power - pstat.Defense/2;
             if (Damage <= 0){Damage = 0;}
             Health = Health - (int) Damage;
             Debug.Log("Player took" + Damage + "damage");
             Damage = 0;
-            Debug.Log("Enemy Move 2");
         }
         if (EnemyChoice == 3)
         {
+            //Debug.Log("Enemy Move 3");
             Damage = estat.Power - pstat.Defense/2;
             if (Damage <= 0){Damage = 0;}
             Health = Health - (int) Damage;
             Debug.Log("Player took" + Damage + "damage");
             Damage = 0;
-            Debug.Log("Enemy Move 3");
         }
         if (EnemyChoice == 4)
         {
@@ -307,13 +346,21 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    //DOOM, MUAHAHAHAHHAHAHHAHHAHAHAHAHAHAHAHAHAHAAHAHHAHAHAHA!
-
-
+    //PLAYER GETS A NEW MOVE
+    void GainingMove()
+    {
+        Instantiate(Screens[1], transform);
+    }
+    //DOOM, MUAHAHAHAHHAHAHA!
+    void GameOver()
+    {
+        Instantiate(Screens[2], transform);
+    }
     //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
     void Summon()
     {
         MenuSummon = true;
+        BattleEnd = false;
         pstat.PlushSelect = false;
         //This summons the enemy on scene, EnemyManager is assigned "e" stats
         EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
@@ -336,6 +383,7 @@ public class BattleManager : MonoBehaviour
 
     void Destruction()
     {
+        Instantiate(Screens[0], transform);
         pstat.PlushSelect = true;
         MenuSummon = false;
             Debug.Log("Battle Manager Cleared");

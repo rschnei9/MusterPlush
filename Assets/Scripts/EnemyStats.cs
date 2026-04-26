@@ -5,6 +5,11 @@ public class EnemyStats : MonoBehaviour
     public float Power;
     public float Defense;
     public float Speed;
+
+    public float BASEPower;
+    public float BASEDefense;
+    public float BASESpeed;
+
     public float Health;
     public bool EnemyDefeat;
 
@@ -14,6 +19,10 @@ public class EnemyStats : MonoBehaviour
 
     void Start()
     {
+        BASEPower = 0;
+        BASEDefense = 0;
+        BASESpeed = 0;
+
         Health = Random.Range(50,100);
 
         EnemyMoveA = Random.Range(1,4);
