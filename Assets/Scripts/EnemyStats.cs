@@ -23,7 +23,7 @@ public class EnemyStats : MonoBehaviour
         BASEDefense = 0;
         BASESpeed = 0;
 
-        Health = Random.Range(50,100);
+        Health = Random.Range(12, 24);
 
         EnemyMoveA = Random.Range(1,4);
         EnemyMoveB = Random.Range(5,7);

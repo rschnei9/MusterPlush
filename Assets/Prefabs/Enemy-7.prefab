@@ -104,8 +104,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede34a8bbbd9bd549b7eaf202074bbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  Power: 3
-  Defense: 2
-  Speed: 1
+  Power: 5
+  Defense: 5
+  Speed: 4
+  BASEPower: 0
+  BASEDefense: 0
+  BASESpeed: 0
   Health: 0
   EnemyDefeat: 0
+  EnemyMoveA: 0
+  EnemyMoveB: 0
+  EnemyMoveC: 0

@@ -60,27 +60,27 @@ public class PlayerStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) && PlushSelect == true)
         {
             PlushChoice = 0;
-            BASEPower = 3;
-            BASEDefense = 1;
-            BASESpeed = 4;
+            BASEPower = 5;
+            BASEDefense = 2;
+            BASESpeed = 9;
             Refresh();
         }
         //Bear Selected
         if (Input.GetKeyDown(KeyCode.O) && PlushSelect == true)
         {
             PlushChoice = 1;
-            BASEPower = 3;
-            BASEDefense = 4;
-            BASESpeed = 1;
+            BASEPower = 6;
+            BASEDefense = 7;
+            BASESpeed = 3;
             Refresh();
         }
         //Bunny Selected
         if (Input.GetKeyDown(KeyCode.P) && PlushSelect == true)
         {
             PlushChoice = 2;
-            BASEPower = 2;
-            BASEDefense = 3;
-            BASESpeed = 3;
+            BASEPower = 4;
+            BASEDefense = 5;
+            BASESpeed = 7;
             Refresh();
         }
         //When the turn ends

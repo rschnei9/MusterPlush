@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour
     //THESE ARE FOR THE UI
     [Header("User Interface")]
     public GameObject[] Buttons;
+    public GameObject[] ActiveButtons;
     public GameObject[] Hearts;
     public GameObject[] Screens;
     public bool Select;
@@ -115,6 +116,7 @@ public class BattleManager : MonoBehaviour
     public IEnumerator TurnStart()
     {
         Debug.Log("Start of the turn!");
+        ActiveButtons[0].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();
         yield return new WaitForSeconds(0.15f);
         StartCoroutine("TurnSpeed");
     }
@@ -216,24 +218,24 @@ public class BattleManager : MonoBehaviour
     void MenuStart()
         {
         MenuSummon = true;
-        Debug.Log("Started Hovering Button A"); MoveABCD = ButtonA;
+        Debug.Log("Started Hovering Button A"); ActiveButtons[0].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonA; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();
         MenuSelect = true;
         }
 
 //MOVE SELECTION PROGRAM
     void SelectMoveL()
     {
-                if (MoveABCD == ButtonB) {Debug.Log("Hovering Button A"); MoveABCD = ButtonA;}
-                else if (MoveABCD == ButtonC) {Debug.Log("Hovering Button B"); MoveABCD = ButtonB;}
-                else if (MoveABCD == ButtonD) {Debug.Log("Hovering Button C"); MoveABCD = ButtonC;}
-                else if (MoveABCD == ButtonA) {Debug.Log("Hovering Button D"); MoveABCD = ButtonD;}
+                if (MoveABCD == ButtonB) {Debug.Log("Hovering Button A"); ActiveButtons[0].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonA; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();}
+                else if (MoveABCD == ButtonC) {Debug.Log("Hovering Button B"); ActiveButtons[1].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonB; ActiveButtons[0].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();}
+                else if (MoveABCD == ButtonD) {Debug.Log("Hovering Button C"); ActiveButtons[2].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonC; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[0].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();}
+                else if (MoveABCD == ButtonA) {Debug.Log("Hovering Button D"); ActiveButtons[3].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonD; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[0].GetComponent<MoveUpdate>().UnHover();}
     }
     void SelectMoveR()
     {
-                if (MoveABCD == ButtonD) {Debug.Log("Hovering Button A"); MoveABCD = ButtonA;}
-                else if (MoveABCD == ButtonA) {Debug.Log("Hovering Button B"); MoveABCD = ButtonB;}
-                else if (MoveABCD == ButtonB) {Debug.Log("Hovering Button C"); MoveABCD = ButtonC;}
-                else if (MoveABCD == ButtonC) {Debug.Log("Hovering Button D"); MoveABCD = ButtonD;}
+                if (MoveABCD == ButtonD) {Debug.Log("Hovering Button A"); ActiveButtons[0].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonA; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();}
+                else if (MoveABCD == ButtonA) {Debug.Log("Hovering Button B"); ActiveButtons[1].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonB; ActiveButtons[0].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();}
+                else if (MoveABCD == ButtonB) {Debug.Log("Hovering Button C"); ActiveButtons[2].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonC; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[0].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();}
+                else if (MoveABCD == ButtonC) {Debug.Log("Hovering Button D"); ActiveButtons[3].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonD; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[0].GetComponent<MoveUpdate>().UnHover();}
     }
 //EVERY POSSIBLE MOVE!
     void PlayerMovePlan()
@@ -368,10 +370,10 @@ public class BattleManager : MonoBehaviour
         //Player summon
         Instantiate(Plushes[pstat.PlushChoice], transform);
         //Button Summons
-        Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
-        Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
-        Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
-        Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
+        ActiveButtons[0] = Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
+        ActiveButtons[1] = Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
+        ActiveButtons[2] = Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
+        ActiveButtons[3] = Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
         //Heart Summons (broken)
         //Instantiate(Hearts[0], transform);
         //Instantiate(Hearts[1], transform);

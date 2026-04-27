@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4696374882594444381}
   - component: {fileID: 2832189652451490598}
+  - component: {fileID: -435399789541770125}
   m_Layer: 0
   m_Name: Move1
   m_TagString: Untagged
@@ -91,3 +92,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-435399789541770125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143246079317017094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcde2447ceb61f94a8a7316299a67a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveUpdate
+  Move:
+  - {fileID: 2832189652451490598}
+  MoveState:
+  - {fileID: -517742111836816807, guid: 74aa8eca4f7e4304bbbcd0838f95bad3, type: 3}
+  - {fileID: -53747639666226579, guid: fa38eaef08f7c734a93e18da8ef9e551, type: 3}
