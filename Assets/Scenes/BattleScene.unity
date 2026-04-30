@@ -686,10 +686,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373ac2b485bf0dc43bb29e01d757fce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  Status:
-  - {fileID: 201795927503445521, guid: b5ff3755c9b399b4fbd355f50ddb47d9, type: 3}
-  - {fileID: 8963808730598562978, guid: 3c45ef28915069042b306b4e06fb1931, type: 3}
-  - {fileID: 2447779079895622970, guid: f2f9909bbbdd36d439e98a059cd03df1, type: 3}
   Condition:
   - {fileID: 7300627059876386458, guid: 7f079ef1c28ce814bad93c0db8b9cee1, type: 3}
   - {fileID: 2296599577994530154, guid: 95c5ff8fc17cd6c4e8477e370ecf6891, type: 3}

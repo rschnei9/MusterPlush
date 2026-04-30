@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Status Conditions")]
-    public GameObject[] Status;
     public GameObject[] Condition;
 
     [Header("Player Statistics")]
@@ -47,11 +46,11 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         PlushChoice = 0;
-        BASEPower = 3;
-        BASEDefense = 1;
-        BASESpeed = 4;
+            BASEPower = 5;
+            BASEDefense = 2;
+            BASESpeed = 9;
+            Refresh();
         PlushSelect = true;
-        Refresh();
     }
 
     void Update()
@@ -98,24 +97,29 @@ public class PlayerStats : MonoBehaviour
         { DefenseU = false; DefenseUP(); }
         if (SpeedU == true)
         { SpeedU = false; SpeedUP(); }
+        if (PowerD == true)
+        { PowerD = false; PowerDOWN(); }
+        if (DefenseD == true)
+        { DefenseD = false; DefenseDOWN(); }
+        if (SpeedD == true)
+        { SpeedD = false; SpeedDOWN (); }
     }
 
     void PowerUP()
-    {Debug.Log("Player Power Doubled"); TimePowerU = 3; PUP = 2; Refresh();}
+    {Debug.Log("Player Power Doubled"); TimePowerU = 4; PUP = 2; Refresh();}
     void DefenseUP()
-    {Debug.Log("Player Defense Doubled"); TimeDefenseU = 3; DUP = 2; Refresh();}
+    {Debug.Log("Player Defense Doubled"); TimeDefenseU = 4; DUP = 2; Refresh();}
     void SpeedUP()
-    {Debug.Log("Player Speed Doubled"); TimeSpeedU = 3; SUP = 2; Refresh();}
+    {Debug.Log("Player Speed Doubled"); TimeSpeedU = 4; SUP = 2; Refresh();}
     void PowerDOWN()
-    {Debug.Log("Player Power Halved"); TimePowerD = 3; PDOWN = 2; Refresh();}
+    {Debug.Log("Player Power Halved"); TimePowerD = 4; PDOWN = 2; Refresh();}
     void DefenseDOWN()
-    {Debug.Log("Player Defense Halved"); TimeDefenseD = 3; DDOWN = 2; Refresh();}
+    {Debug.Log("Player Defense Halved"); TimeDefenseD = 4; DDOWN = 2; Refresh();}
     void SpeedDOWN()
-    {Debug.Log("Player Speed Halved"); TimeSpeedD = 3; SDOWN = 2; Refresh();}
+    {Debug.Log("Player Speed Halved"); TimeSpeedD = 4; SDOWN = 2; Refresh();}
 
     void Refresh()
     {
-        Debug.Log ("Refresh Time Scale");
         if (TimePowerU <= 0){TimePowerU = 0; PUP = 1;}
         if (TimeDefenseU <= 0){TimeDefenseU = 0; DUP = 1;}
         if (TimeSpeedU <= 0){TimeSpeedU = 0; SUP = 1;}
@@ -125,15 +129,13 @@ public class PlayerStats : MonoBehaviour
 
         //for (int i = 0; i < transform.childCount; i++)
             //{Destroy(transform.GetChild(i).gameObject);}
-        Debug.Log ("Refresh Stat Icons");;
-        if (TimePowerU > 0) {Instantiate(Condition[0], transform);}
-        if (TimeDefenseU > 0) {Instantiate(Condition[1], transform);}
-        if (TimeSpeedU > 0) {Instantiate(Condition[2], transform);}
-        if (TimePowerD > 0) {Instantiate(Condition[3], transform);}
-        if (TimeDefenseD > 0) {Instantiate(Condition[4], transform);}
-        if (TimeSpeedD > 0) {Instantiate(Condition[5], transform);}
+        //if (TimePowerU > 0) {Instantiate(Condition[0], transform);}
+        //if (TimeDefenseU > 0) {Instantiate(Condition[1], transform);}
+        //if (TimeSpeedU > 0) {Instantiate(Condition[2], transform);}
+        //if (TimePowerD > 0) {Instantiate(Condition[3], transform);}
+        //if (TimeDefenseD > 0) {Instantiate(Condition[4], transform);}
+        //if (TimeSpeedD > 0) {Instantiate(Condition[5], transform);}
         
-        Debug.Log ("Refresh Stats");
         Power = BASEPower * PUP / PDOWN;
         Defense = BASEDefense * DUP / DDOWN;
         Speed = BASESpeed * SUP / SDOWN;

@@ -117,7 +117,7 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Start of the turn!");
         ActiveButtons[0].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(1f);
         StartCoroutine("TurnSpeed");
     }
     public IEnumerator TurnSpeed()
@@ -137,10 +137,10 @@ public class BattleManager : MonoBehaviour
             {EnemyMove = true; Debug.Log("Enemy First!");}
 
         else
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.25f);
             //Debug.Log("End of Speed Check");
             FirstTurn = true;
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.75f);
             StartCoroutine("TurnOne");
     }
     public IEnumerator TurnOne()
@@ -158,7 +158,7 @@ public class BattleManager : MonoBehaviour
                 EnemyMovePlan();
             }
 
-                yield return new WaitForSeconds(0.15f);
+                yield return new WaitForSeconds(1f);
                 FirstTurn = false; SecondTurn = true;
                 StartCoroutine("TurnTwo");
         }
@@ -180,7 +180,7 @@ public class BattleManager : MonoBehaviour
                 EnemyMovePlan();
             }
 
-                yield return new WaitForSeconds(0.15f);
+                yield return new WaitForSeconds(1f);
                 SecondTurn = false;
                 StartCoroutine("TurnEnd");
         }
@@ -192,9 +192,10 @@ public class BattleManager : MonoBehaviour
         if (estat.EnemyDefeat == false || Defeat == false)
         {
             pstat.TurnEnd = true;
+            estat.TurnEnd = true;
             yield return new WaitForSeconds(0.15f);
             MenuStart();
-            Debug.Log("End of turn");
+            Debug.Log("End of turn!");
         }
         if (estat.EnemyDefeat == true)
         {
@@ -244,8 +245,11 @@ public class BattleManager : MonoBehaviour
         {
             //Debug.Log("Player Move 1");
             Damage = pstat.Power - estat.Defense/2;
-            if (Damage <= 0){Damage = 0;}
-            estat.Health = estat.Health - Damage;
+            Chance = Random.Range(0,6);
+
+            if (Chance == 6) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
+            if (Damage <= 1){Damage = 1;}
+            estat.Health = estat.Health - (int) Damage;
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
         }
@@ -266,19 +270,60 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 4)
         {
-            //Debug.Log("Player Move 5");
+            //Debug.Log("Player Move 5");BURN
+            Damage = pstat.Power - estat.Defense/2;
+            Chance = Random.Range(0,9);
+
+            if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
+            if (Damage <= 1){Damage = 1;}
+            estat.Health = estat.Health - (int) Damage;
+            Debug.Log("Enemy took" + Damage + "damage");
+            Damage = 0;
+            
+            Chance = Random.Range(0,3);
+            if (Chance == 1) {estat.BurningE = true; Chance = 0;}
         }
         if (MoveABCD == 5)
         {
-            //Debug.Log("Player Move 6");
+            //Debug.Log("Player Move 6");FREEZE
+            Damage = pstat.Power - estat.Defense/2;
+            Chance = Random.Range(0,9);
+
+            if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
+            if (Damage <= 1){Damage = 1;}
+            estat.Health = estat.Health - (int) Damage;
+            Debug.Log("Enemy took" + Damage + "damage");
+            Damage = 0;
+            
+            Chance = Random.Range(0,3);
+            if (Chance == 1) {estat.FreezeE = true; Chance = 0;}
         }
         if (MoveABCD == 6)
         {
-            //Debug.Log("Player Move 7");
+            //Debug.Log("Player Move 7");DIZZY
+            Damage = pstat.Power - estat.Defense/2;
+            Chance = Random.Range(0,9);
+
+            if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
+            if (Damage <= 1){Damage = 1;}
+            estat.Health = estat.Health - (int) Damage;
+            Debug.Log("Enemy took" + Damage + "damage");
+            Damage = 0;
+            
+            Chance = Random.Range(0,3);
+            if (Chance == 1) {estat.DizzyE = true; Chance = 0;}
         }
         if (MoveABCD == 7)
         {
-            //Debug.Log("Player Move 8");
+            //Debug.Log("Player Move 8");REDSWORD
+            Damage = (pstat.Power - estat.Defense/2) + 3;
+            Chance = Random.Range(0,12);
+
+            if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
+            if (Damage <= 1){Damage = 1;}
+            estat.Health = estat.Health - (int) Damage;
+            Debug.Log("Enemy took" + Damage + "damage");
+            Damage = 0;
         }
         if (MoveABCD == 8)
         {
@@ -295,56 +340,46 @@ public class BattleManager : MonoBehaviour
 //ENEMY MOVE SELECTION
     void EnemyMovePlan()
     {
-        if (EnemyChoice == 1)
+        if (EnemyChoice == 1 || EnemyChoice == 2 || EnemyChoice == 3 || EnemyChoice == 4)
         {
             //Debug.Log("Enemy Move 1");
             Damage = estat.Power - pstat.Defense/2;
-            if (Damage <= 0){Damage = 0;}
+            Chance = Random.Range(0,12);
+
+            if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
+            if (Damage <= 1){Damage = 1;}
             Health = Health - (int) Damage;
             Debug.Log("Player took" + Damage + "damage");
             Damage = 0;
-        }
-        if (EnemyChoice == 2)
-        {
-            //Debug.Log("Enemy Move 2");
-            Damage = estat.Power - pstat.Defense/2;
-            if (Damage <= 0){Damage = 0;}
-            Health = Health - (int) Damage;
-            Debug.Log("Player took" + Damage + "damage");
-            Damage = 0;
-        }
-        if (EnemyChoice == 3)
-        {
-            //Debug.Log("Enemy Move 3");
-            Damage = estat.Power - pstat.Defense/2;
-            if (Damage <= 0){Damage = 0;}
-            Health = Health - (int) Damage;
-            Debug.Log("Player took" + Damage + "damage");
-            Damage = 0;
-        }
-        if (EnemyChoice == 4)
-        {
-            Debug.Log("Enemy Move 4");
         }
         if (EnemyChoice == 5)
         {
-            Debug.Log("Enemy Move 5");
+            Debug.Log("Enemy lowered Player Power");
+            pstat.PowerD = true;
         }
         if (EnemyChoice == 6)
         {
-            Debug.Log("Enemy Move 6");
+            Debug.Log("Enemy lowered Player Defense");
+            pstat.DefenseD = true;
         }
         if (EnemyChoice == 7)
         {
-            Debug.Log("Enemy Move 7");
+            Debug.Log("Enemy lowered Player Speed");
+            pstat.SpeedD = true;
         }
         if (EnemyChoice == 8)
         {
-            Debug.Log("Enemy Move 8");
+            Debug.Log("Defense Ignorant Move");
+            Damage = estat.Power - pstat.Defense/3;
+            if (Damage <= 1){Damage = 1;}
+            Health = Health - (int) Damage;
+            Debug.Log("Player took" + Damage + "damage");
+            Damage = 0;
         }
         if (EnemyChoice == 9)
         {
             Debug.Log("Enemy Move 9");
+            estat.Health = estat.Health + 4;
         }
     }
 
