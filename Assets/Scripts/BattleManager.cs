@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using TMPro;
 
 public class BattleManager : MonoBehaviour
 {
@@ -62,6 +63,11 @@ public class BattleManager : MonoBehaviour
     [Header("Calculator Stuff")]
     public float Damage;
     public int Chance;
+    [Header("Display (UI)")]
+    public TextMeshProUGUI UI;
+    public TextMeshProUGUI PowerUI;
+    public TextMeshProUGUI DefenseUI;
+    public TextMeshProUGUI SpeedUI;
 
     void Start()
     {
@@ -75,10 +81,15 @@ public class BattleManager : MonoBehaviour
         MenuSelect = true;
         Health = 16;
         pstat = GetComponent<PlayerStats>();
+        UI.text = "" + Health;
     }
 
     void Update()
     {
+        //Statistic Updates UI
+        PowerUI.text =  "" + pstat.Power;
+        DefenseUI.text =  "" + pstat.Defense;
+        SpeedUI.text =  "" + pstat.Speed;
         //ACTIVE MODIFIERS
         if (Health >= 16)
             {Health = 16;}
