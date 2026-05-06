@@ -116,37 +116,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Condition3-3_0
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 36
-        width: 116
-        height: 82
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 18a4d28ccc1564490800000000000000
-      internalID: -7762426967752881535
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Condition3-3_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 7
-        width: 101
-        height: 72
+        x: 0
+        y: 0
+        width: 125
+        height: 125
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -163,7 +141,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e77063949313c8c4ab94568ef47dd0fd
     internalID: 0
     vertices: []
     indices: 

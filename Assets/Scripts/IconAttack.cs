@@ -19,6 +19,7 @@ public class IconAttack : MonoBehaviour
         if (plstat.PUP == 2) {Icon[0].sprite = IconStates[1];}
         if (plstat.PDOWN == 2) {Icon[0].sprite = IconStates[2];}
         if (plstat.PUP == 2 && plstat.PDOWN == 2) {Icon[0].sprite = IconStates[0];}
+        if (plstat.PUP != 2 && plstat.PDOWN != 2) {Icon[0].sprite = IconStates[0];}
         }
     }
 }

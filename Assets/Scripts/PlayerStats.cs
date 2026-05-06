@@ -42,6 +42,9 @@ public class PlayerStats : MonoBehaviour
     public int SUP;
     public int SDOWN;
 
+    [Header("Timer Management")]
+    public GameObject[] Timers;
+    public bool TimerFix;
 
     void Start()
     {
@@ -126,15 +129,6 @@ public class PlayerStats : MonoBehaviour
         if (TimePowerD <= 0){TimePowerD = 0; PDOWN = 1;}
         if (TimeDefenseD <= 0){TimeDefenseD = 0; DDOWN = 1;}
         if (TimeSpeedD <= 0){TimeSpeedD = 0; SDOWN = 1;}
-
-        //for (int i = 0; i < transform.childCount; i++)
-            //{Destroy(transform.GetChild(i).gameObject);}
-        //if (TimePowerU > 0) {Instantiate(Condition[0], transform);}
-        //if (TimeDefenseU > 0) {Instantiate(Condition[1], transform);}
-        //if (TimeSpeedU > 0) {Instantiate(Condition[2], transform);}
-        //if (TimePowerD > 0) {Instantiate(Condition[3], transform);}
-        //if (TimeDefenseD > 0) {Instantiate(Condition[4], transform);}
-        //if (TimeSpeedD > 0) {Instantiate(Condition[5], transform);}
         
         Power = BASEPower * PUP / PDOWN;
         Defense = BASEDefense * DUP / DDOWN;

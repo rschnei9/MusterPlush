@@ -19,6 +19,7 @@ public class IconSpeed : MonoBehaviour
         if (plstat.SUP == 2) {Icon[0].sprite = IconStates[1];}
         if (plstat.SDOWN == 2) {Icon[0].sprite = IconStates[2];}
         if (plstat.SUP == 2 && plstat.SDOWN == 2) {Icon[0].sprite = IconStates[0];}
+        if (plstat.SUP != 2 && plstat.SDOWN != 2) {Icon[0].sprite = IconStates[0];}
         }
     }
 }

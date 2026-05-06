@@ -66,6 +66,8 @@ public class BattleManager : MonoBehaviour
     public int ChanceTwo;
 
     [Header("Display (UI)")]
+    public GameObject[] UIBlock;
+    public TextMeshProUGUI TopUI;
     public TextMeshProUGUI UI;
     public TextMeshProUGUI PowerUI;
     public TextMeshProUGUI DefenseUI;
@@ -73,6 +75,10 @@ public class BattleManager : MonoBehaviour
     public int DizzyCheck;
     public int BurnCheck;
     public int FreezeCheck;
+    public int DizzyTB;
+    public int BurningTB;
+    public int FreezeTB;
+    public bool TimerDeath;
 
     void Start()
     {
@@ -86,7 +92,9 @@ public class BattleManager : MonoBehaviour
         MenuSelect = true;
         Health = 16;
         pstat = GetComponent<PlayerStats>();
-        UI.text = "Select plush (IOP) Temporary";
+        TopUI.text = "Plush Select (A: Left, D: Right)";
+        //transform.Translate(0,22,0); I NEED THIS TO MOVE THE GAME OBJECT ABOVE LABELED AS "UIBlock", I ALSO NEED TO MOVE THE TEXTMESHPRO "TopUI"
+        //This will be so that they get moved off screen while not in use, its for the plush and move select screen. The game over screen wont be so hard.
     }
 
     void Update()
@@ -102,6 +110,11 @@ public class BattleManager : MonoBehaviour
         else {DizzyCheck = 1;}
         if (MenuSummon && estat.Freeze == 2) {FreezeCheck = 2;}
         else {DizzyCheck = 1;}
+
+        //Special TIMER check
+        if (MenuSummon) {DizzyTB = estat.DizzyT; BurningTB = estat.BurningT; FreezeTB = estat.FreezeT;}
+        if (pstat.TimerFix == false) {TimerDeath = true;}
+        if (pstat.TimerFix == true) {TimerDeath = false;}
         
         //ACTIVE MODIFIERS
         if (Health >= 16)
@@ -114,10 +127,14 @@ public class BattleManager : MonoBehaviour
             BattleEnd = true;
             UI.text = "Player Defeated";
             Debug.Log("Player Defeated");
+            Instantiate(Screens[0], transform);
             TurnEnd();
         }
         if (MenuSummon && estat.EnemyDefeat)
         {
+            UI.text = "Enemy Defeated";
+            Debug.Log("Enemy Defeated");
+            Instantiate(Screens[0], transform);
             BattleEnd = true;
         }
         //TEMPORARY TEST FUNCTIONS
@@ -178,6 +195,7 @@ public class BattleManager : MonoBehaviour
     }
     public IEnumerator TurnOne()
     {
+        Damage = 0;
         if (BattleEnd == false)
         {
         if (FirstTurn = true && PlayerMove == true && Defeat == false && estat.EnemyDefeat == false)
@@ -190,7 +208,6 @@ public class BattleManager : MonoBehaviour
                 if (EnemyChoice >= 11 && EnemyChoice <= 12){EnemyChoice = estat.EnemyMoveC;}
                 EnemyMovePlan();
             }
-
                 yield return new WaitForSeconds(2f);
                 FirstTurn = false; SecondTurn = true;
                 StartCoroutine("TurnTwo");
@@ -200,6 +217,7 @@ public class BattleManager : MonoBehaviour
     }
     public IEnumerator TurnTwo()
     {
+        Damage = 0;
         if (BattleEnd == false)
         {
         if (SecondTurn = true && PlayerMove == false)
@@ -212,13 +230,12 @@ public class BattleManager : MonoBehaviour
                 if (EnemyChoice >= 11 && EnemyChoice <= 12){EnemyChoice = estat.EnemyMoveC;}
                 EnemyMovePlan();
             }
-
                 yield return new WaitForSeconds(2f);
                 SecondTurn = false;
                 StartCoroutine("TurnEnd");
         }
         else
-                StartCoroutine("TurnEnd");
+        StartCoroutine("TurnEnd");
     }
     public IEnumerator TurnEnd()
     {
@@ -284,10 +301,10 @@ public class BattleManager : MonoBehaviour
             Chance = Random.Range(0,6);
 
             if (Chance == 6) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
-            if (Damage <= 1){Damage = 1;}
+            if (Damage <= 1) {Damage = 1;}
             estat.Health = estat.Health - (int) Damage;
             if (Chance == 6) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Basic Attack!";}
-            else {UI.text = "The Enemy took " + Damage + " Damage from the Basic Attack!";}
+            if (Chance != 6) {UI.text = "The Enemy took " + Damage + " Damage from the Basic Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
         }
@@ -316,16 +333,16 @@ public class BattleManager : MonoBehaviour
             Chance = Random.Range(0,9);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
-            if (Damage <= 1){Damage = 1;}
+            if (Damage <= 1) {Damage = 1;}
 
             ChanceTwo = Random.Range(0,3);
             if (ChanceTwo == 1) {estat.BurningE = true; Chance = 0;}
 
             estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
-            else if (ChanceTwo == 1) {UI.text = "The Player burned the Enemy! The Enemy took " + (int) Damage + " Damage from the Fire Attack";}
-            else if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and burned the Enemy! The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
-            else {UI.text = "The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
+            if (ChanceTwo == 1) {UI.text = "The Player burned the Enemy! The Enemy took " + (int) Damage + " Damage from the Fire Attack";}
+            if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and burned the Enemy! The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
+            if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
         }
@@ -336,16 +353,16 @@ public class BattleManager : MonoBehaviour
             Chance = Random.Range(0,9);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
-            if (Damage <= 1){Damage = 1;}
+            if (Damage <= 1) {Damage = 1;}
 
             ChanceTwo = Random.Range(0,3);
             if (ChanceTwo == 1) {estat.FreezeE = true; Chance = 0;}
 
             estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
-            else if (ChanceTwo == 1) {UI.text = "The Player froze the Enemy! The Enemy took " + (int) Damage + " Damage from the Ice Attack";}
-            else if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and froze the Enemy! The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
-            else {UI.text = "The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
+            if (ChanceTwo == 1) {UI.text = "The Player froze the Enemy! The Enemy took " + (int) Damage + " Damage from the Ice Attack";}
+            if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and froze the Enemy! The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
+            if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
         }
@@ -356,16 +373,16 @@ public class BattleManager : MonoBehaviour
             Chance = Random.Range(0,9);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
-            if (Damage <= 1){Damage = 1;}
+            if (Damage <= 1) {Damage = 1;}
 
             ChanceTwo = Random.Range(0,3);
             if (ChanceTwo == 1) {estat.DizzyE = true; Chance = 0;}
 
             estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
-            else if (ChanceTwo == 1) {UI.text = "The Player bewildered the Enemy! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack";}
-            else if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and bewildered the Enemy! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
-            else {UI.text = "The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
+            if (ChanceTwo == 1) {UI.text = "The Player bewildered the Enemy! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack";}
+            if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and bewildered the Enemy! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
+            if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
         }
@@ -376,10 +393,10 @@ public class BattleManager : MonoBehaviour
             Chance = Random.Range(0,12);
 
             if (Chance == 1) {Damage = Damage * 1.5f; UI.text = "The Enemy took " + Damage + " Damage from the Ice Attack!";; Chance = 0;}
-            if (Damage <= 1){Damage = 1;}
+            if (Damage <= 1) {Damage = 1;}
             estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Strong Attack!";}
-            else {UI.text = "The Enemy took " + (int) Damage + " Damage from the Strong Attack!";}
+            if (Chance != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Strong Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
         }
@@ -409,10 +426,10 @@ public class BattleManager : MonoBehaviour
             Chance = Random.Range(0,12);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
-            if (Damage <= 1){Damage = 1;}
+            if (Damage <= 1) {Damage = 1;}
             Health = Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Enemy landed a critical hit! The Player took " + (int) Damage + " Damage from the Enemy Attack!";}
-            else {UI.text = "The Player took " + (int) Damage + " Damage from the Enemy Attack!";}
+            if (Chance != 1) {UI.text = "The Player took " + (int) Damage + " Damage from the Enemy Attack!";}
             Debug.Log("Player took" + Damage + "damage");
             Damage = 0;
         }
@@ -438,10 +455,10 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("Defense Ignorant Move");
             Damage = estat.Power - pstat.Defense/3;
-            if (Damage <= 1){Damage = 1;}
+            if (Damage <= 1) {Damage = 1;}
             Health = Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Enemy landed a critical hit! The Player took " + (int) Damage + " Damage from the Enemies Defense Ignorant Attack!";}
-            else {UI.text = "The Player took " + (int) Damage + " Damage from the Enemies Defense Ignorant Attack!";}
+            if (Chance != 1) {UI.text = "The Player took " + (int) Damage + " Damage from the Enemies Defense Ignorant Attack!";}
             Debug.Log("Player took" + Damage + "damage");
             Damage = 0;
         }
