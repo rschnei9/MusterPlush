@@ -45,46 +45,32 @@ public class PlayerStats : MonoBehaviour
     [Header("Timer Management")]
     public GameObject[] Timers;
     public bool TimerFix;
+    public bool ResetBool;
 
     void Start()
     {
-        PlushChoice = 0;
-            BASEPower = 5;
-            BASEDefense = 2;
-            BASESpeed = 9;
-            Refresh();
+        PlushChoice = 0; BASEPower = 5; BASEDefense = 2; BASESpeed = 9;
+        Refresh();
         PlushSelect = true;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 0) {BunnyP();}
+        else if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 1) {CatP();}
+        else if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 2) {BearP();}
+
+        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 0) {BearP();}
+        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 1) {BunnyP();}
+        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 2) {CatP();}
+
         //Cat Selected
-        if (Input.GetKeyDown(KeyCode.I) && PlushSelect == true)
-        {
-            PlushChoice = 0;
-            BASEPower = 5;
-            BASEDefense = 2;
-            BASESpeed = 9;
-            Refresh();
-        }
+        void CatP() {PlushChoice = 0; BASEPower = 5; BASEDefense = 2; BASESpeed = 9; Refresh();}
         //Bear Selected
-        if (Input.GetKeyDown(KeyCode.O) && PlushSelect == true)
-        {
-            PlushChoice = 1;
-            BASEPower = 6;
-            BASEDefense = 7;
-            BASESpeed = 3;
-            Refresh();
-        }
+        void BearP() {PlushChoice = 1; BASEPower = 6; BASEDefense = 7; BASESpeed = 3; Refresh();}
         //Bunny Selected
-        if (Input.GetKeyDown(KeyCode.P) && PlushSelect == true)
-        {
-            PlushChoice = 2;
-            BASEPower = 4;
-            BASEDefense = 5;
-            BASESpeed = 7;
-            Refresh();
-        }
+        void BunnyP() {PlushChoice = 2; BASEPower = 4; BASEDefense = 5; BASESpeed = 7; Refresh();}
+
         //When the turn ends
         if (TurnEnd == true)
         {
@@ -106,6 +92,8 @@ public class PlayerStats : MonoBehaviour
         { DefenseD = false; DefenseDOWN(); }
         if (SpeedD == true)
         { SpeedD = false; SpeedDOWN (); }
+
+        if (ResetBool == true) {ResetBool = false; Reset();}
     }
 
     void PowerUP()
@@ -134,4 +122,6 @@ public class PlayerStats : MonoBehaviour
         Defense = BASEDefense * DUP / DDOWN;
         Speed = BASESpeed * SUP / SDOWN;
     }
+    void Reset()
+    {TimePowerU = 0; TimePowerD = 0; TimeDefenseU = 0; TimeDefenseD = 0; TimeSpeedU = 0; TimeSpeedD = 0; Refresh();}
 }

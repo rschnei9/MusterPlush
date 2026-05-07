@@ -47,8 +47,11 @@ public class BattleManager : MonoBehaviour
     public int EnemyC;
     public int EnemyABC;
 
+    public bool TurnEnding;
     public bool MenuSummon;
     public bool MenuSelect;
+    public bool MoveSelect;
+    public bool StatSelect;
 
     //THESE ARE FOR GAME LOGIC
     public bool SpeedTie;
@@ -67,6 +70,7 @@ public class BattleManager : MonoBehaviour
 
     [Header("Display (UI)")]
     public GameObject[] UIBlock;
+    public GameObject[] Condition;
     public TextMeshProUGUI TopUI;
     public TextMeshProUGUI UI;
     public TextMeshProUGUI PowerUI;
@@ -82,6 +86,8 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+        pstat = GetComponent<PlayerStats>();
+
         ButtonA = 0;
         ButtonB = 1;
         ButtonC = 2;
@@ -91,8 +97,8 @@ public class BattleManager : MonoBehaviour
         MenuSummon = false;
         MenuSelect = true;
         Health = 16;
-        pstat = GetComponent<PlayerStats>();
-        TopUI.text = "Plush Select (A: Left, D: Right)";
+
+        StartingSummon();
         //transform.Translate(0,22,0); I NEED THIS TO MOVE THE GAME OBJECT ABOVE LABELED AS "UIBlock", I ALSO NEED TO MOVE THE TEXTMESHPRO "TopUI"
         //This will be so that they get moved off screen while not in use, its for the plush and move select screen. The game over screen wont be so hard.
     }
@@ -125,25 +131,32 @@ public class BattleManager : MonoBehaviour
             Health = 0;
             Defeat = true;
             BattleEnd = true;
-            UI.text = "Player Defeated";
             Debug.Log("Player Defeated");
-            Instantiate(Screens[0], transform);
-            TurnEnd();
+            if (FirstTurn == true)
+            {StartCoroutine("TurnOneDoom");}
         }
-        if (MenuSummon && estat.EnemyDefeat)
+        if (MenuSummon && estat.EnemyDefeat && BattleEnd == false)
         {
-            UI.text = "Enemy Defeated";
             Debug.Log("Enemy Defeated");
-            Instantiate(Screens[0], transform);
             BattleEnd = true;
+            if (FirstTurn == true)
+            {StartCoroutine("TurnOneDoom");}
         }
+        
         //TEMPORARY TEST FUNCTIONS
-
-        if (Input.GetKeyDown(KeyCode.Z) && MenuSummon == true) {Destruction();}
-        if (Input.GetKeyDown(KeyCode.X) && MenuSummon == false) {Summon();}
+        //if (Input.GetKeyDown(KeyCode.Z) && MenuSummon == true) {Destruction();}
+        //if (Input.GetKeyDown(KeyCode.X) && MenuSummon == false) {Summon();}
         if (Input.GetKeyDown(KeyCode.Y)) { Health -= 1; }
         if (Input.GetKeyDown(KeyCode.U)) { Health += 1; }
-        if (Input.GetKeyDown(KeyCode.T)) {Instantiate(Screens[0], transform);}
+        //if (Input.GetKeyDown(KeyCode.T)) {Instantiate(Screens[0], transform);}
+
+        //PLUSH SELECTION FUNCTIONS
+        if (Input.GetKeyDown(KeyCode.E) && pstat.PlushSelect == true) {Instantiate(Screens[0], transform); pstat.PlushSelect = false; MenuSelect = false; StartCoroutine("Starting");}
+        if (pstat.PlushSelect == true) {Chance = 0 + pstat.PlushChoice;}
+
+        if (pstat.PlushSelect == true && Chance == 0) {UI.text = "Cat Plush! This choice will last for the rest of the game until you lose!";}
+        if (pstat.PlushSelect == true && Chance == 1) {UI.text = "Bear Plush! This choice will last for the rest of the game until you lose!";}
+        if (pstat.PlushSelect == true && Chance == 2) {UI.text = "Bunny Plush! This choice will last for the rest of the game until you lose!";}
 
         //UI INDICATORS
         hm.UpdateHearts(Health);
@@ -155,7 +168,7 @@ public class BattleManager : MonoBehaviour
                 {SelectMoveL();}
             
         //MOVE SELECTION
-        if (Input.GetKeyDown(KeyCode.E) && MenuSelect == true && Defeat == false && estat.EnemyDefeat == false)
+        if (Input.GetKeyDown(KeyCode.E) && MenuSelect == true && Defeat == false && pstat.PlushSelect == false && estat.EnemyDefeat == false)
         {
             MenuSelect = false;
             StartCoroutine("TurnStart");
@@ -212,17 +225,15 @@ public class BattleManager : MonoBehaviour
                 FirstTurn = false; SecondTurn = true;
                 StartCoroutine("TurnTwo");
         }
-        else
-        StartCoroutine("TurnEnd");
     }
     public IEnumerator TurnTwo()
     {
         Damage = 0;
         if (BattleEnd == false)
         {
-        if (SecondTurn = true && PlayerMove == false)
+        if (SecondTurn = true && PlayerMove == false && Defeat == false && estat.EnemyDefeat == false)
             {PlayerMovePlan();}
-        if (SecondTurn = true && EnemyMove == false)
+        if (SecondTurn = true && EnemyMove == false && Defeat == false && estat.EnemyDefeat == false)
             {
                 EnemyChoice = Random.Range(1,12);
                 if (EnemyChoice <= 7){EnemyChoice = estat.EnemyMoveA;}
@@ -234,9 +245,9 @@ public class BattleManager : MonoBehaviour
                 SecondTurn = false;
                 StartCoroutine("TurnEnd");
         }
-        else
-        StartCoroutine("TurnEnd");
+        
     }
+    public IEnumerator TurnOneDoom() {yield return new WaitForSeconds(2f); StartCoroutine("TurnEnd");}
     public IEnumerator TurnEnd()
     {
         if (BattleEnd == false)
@@ -250,18 +261,18 @@ public class BattleManager : MonoBehaviour
         if (estat.EnemyDefeat == true)
         {
             BattleEnd = true;
-            Instantiate(Screens[0], transform);
-            Debug.Log("Enemy is defeated, select new move!");
-            Destruction();
-            GainingMove();
-            estat.EnemyDefeat = false;
+            UI.text = "The Enemy has been defeated!";
+            Debug.Log("Player wins the fight");
+            yield return new WaitForSeconds(2f);
+            StartCoroutine("MoveStarting");
         }
         if (Defeat == true)
         {
             BattleEnd = true;
             Instantiate(Screens[0], transform);
+            UI.text = "The Player has been defeated!";
             Debug.Log("Player loses the fight");
-            Destruction();
+            yield return new WaitForSeconds(2f);
             GameOver();
             Defeat = false;
         }
@@ -473,7 +484,10 @@ public class BattleManager : MonoBehaviour
     //PLAYER GETS A NEW MOVE
     void GainingMove()
     {
+        MoveSelect = true;
+        MenuSelect = false;
         Instantiate(Screens[1], transform);
+        MoveSummon();
     }
     //DOOM, MUAHAHAHAHHAHAHA!
     void GameOver()
@@ -486,6 +500,9 @@ public class BattleManager : MonoBehaviour
         MenuSummon = true;
         BattleEnd = false;
         pstat.PlushSelect = false;
+        //This summons the UI blocks AND the Conditions!
+        Instantiate(UIBlock[1], transform);
+        Instantiate(UIBlock[2], transform);
         //This summons the enemy on scene, EnemyManager is assigned "e" stats
         EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
         estat = EnemyManager.GetComponent<EnemyStats>();
@@ -502,8 +519,10 @@ public class BattleManager : MonoBehaviour
 
     void Destruction()
     {
-        Instantiate(Screens[0], transform);
-        pstat.PlushSelect = true;
+        Health = 16;
+        pstat.ResetBool = true;
+        TopUI.text = "";
+        pstat.PlushSelect = false;
         MenuSummon = false;
             Debug.Log("Battle Manager Cleared");
         for (int i = 0; i < transform.childCount; i++)
@@ -522,5 +541,31 @@ public class BattleManager : MonoBehaviour
         if (MoveABCD == 7) {UI.text = "Damage the Enemy, much stronger on average with a lower critical hit chance!";}
         if (MoveABCD == 8) {UI.text = "Heal yourself between 2-7 Health, it's random every time you utilize this move!";}
         if (MoveABCD == 9) {UI.text = "Heal yourself 5 Health on each use, try not to get out-damaged by the Enemy while healing!";}
+    }
+    void StartingSummon()
+    {
+        pstat.PlushSelect = true;
+        TopUI.text = "Plush Select (A: Left, D: Right) When you're ready, press (E) to start!";
+        Instantiate(UIBlock[0], transform);
+        Instantiate(UIBlock[1], transform);
+        Instantiate(UIBlock[2], transform);
+    }
+    public IEnumerator Starting()
+    {yield return new WaitForSeconds(1.5f); Destruction(); MenuSelect = true; Summon();}
+    public IEnumerator MoveStarting()
+    {estat.EnemyDefeat = false; yield return new WaitForSeconds(1.5f); Destruction(); MenuSelect = true; MoveSummon();}
+
+    void MoveSummon()
+    {
+
+        Instantiate(UIBlock[0], transform);
+        Instantiate(UIBlock[1], transform);
+        Instantiate(UIBlock[2], transform);
+
+        ActiveButtons[0] = Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
+        ActiveButtons[1] = Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
+        ActiveButtons[2] = Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
+        ActiveButtons[3] = Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
+        hm.UpdateHearts(Health);
     }
 }
