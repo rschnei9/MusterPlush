@@ -2,5 +2,24 @@ using UnityEngine;
 
 public class IconDefense : MonoBehaviour
 {
-//This script never worked, 2 hours of making it. it was two lines. a destroy game object line and a line BEGGING the battle manager for information. the console error never disappeared so this is going rightfully unused for wasting my time.
+    public SpriteRenderer [] Icon;
+    public Sprite [] IconStates;
+    public PlayerStats plstat;
+    public BattleManager bat;
+
+    void Start()
+    {
+        Icon[0].sprite = IconStates[0];
+    }
+
+    void Update()
+    {
+        if (bat.MenuSummon == true)
+        {
+        if (plstat.DUP == 2) {Icon[0].sprite = IconStates[1];}
+        if (plstat.DDOWN == 2) {Icon[0].sprite = IconStates[2];}
+        if (plstat.DUP == 2 && plstat.PDOWN == 2) {Icon[0].sprite = IconStates[0];}
+        if (plstat.DUP != 2 && plstat.PDOWN != 2) {Icon[0].sprite = IconStates[0];}
+        }
+    }
 }

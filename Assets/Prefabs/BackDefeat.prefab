@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6654576898043717800}
   - component: {fileID: 1727465443228270936}
   m_Layer: 0
-  m_Name: Background_Over_0
+  m_Name: BackDefeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,9 +79,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 200
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7811378781132747309, guid: 8022f44f7325a914b8205178ebd91e4a, type: 3}
+  m_Sprite: {fileID: -5090266087726099736, guid: 0e1148b848807f140b32ba25b9b8ffd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

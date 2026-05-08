@@ -10,6 +10,7 @@ public class BattleManager : MonoBehaviour
 
     private PlayerStats pstat;
     private EnemyStats estat;
+    public PlushRead plush;
 
     public GameObject PlayerManager;
     public GameObject EnemyManager;
@@ -26,12 +27,11 @@ public class BattleManager : MonoBehaviour
     public float Enemy;
     public int EnemyChoice;
 
-    //THESE ARE FOR THE UI
+    //THESE ARE FOR THE BATTLE UI
     [Header("User Interface")]
     public GameObject[] Buttons;
     public GameObject[] ActiveButtons;
     public GameObject[] Hearts;
-    public GameObject[] Screens;
     public bool Select;
     public bool BattleEnd;
     public bool Pause;
@@ -68,14 +68,18 @@ public class BattleManager : MonoBehaviour
     public int Chance;
     public int ChanceTwo;
 
+    //THESE ARE FOR OTHER THINGS
     [Header("Display (UI)")]
     public GameObject[] UIBlock;
     public GameObject[] Condition;
+    public GameObject[] Backgrounds;
+
     public TextMeshProUGUI TopUI;
     public TextMeshProUGUI UI;
     public TextMeshProUGUI PowerUI;
     public TextMeshProUGUI DefenseUI;
     public TextMeshProUGUI SpeedUI;
+
     public int DizzyCheck;
     public int BurnCheck;
     public int FreezeCheck;
@@ -84,23 +88,14 @@ public class BattleManager : MonoBehaviour
     public int FreezeTB;
     public bool TimerDeath;
 
+    public bool PlushView;
+
     void Start()
     {
-        pstat = GetComponent<PlayerStats>();
-
-        ButtonA = 0;
-        ButtonB = 1;
-        ButtonC = 2;
-        ButtonD = 3;
-    
-        Defeat = false;
-        MenuSummon = false;
-        MenuSelect = true;
-        Health = 16;
-
-        StartingSummon();
-        //transform.Translate(0,22,0); I NEED THIS TO MOVE THE GAME OBJECT ABOVE LABELED AS "UIBlock", I ALSO NEED TO MOVE THE TEXTMESHPRO "TopUI"
-        //This will be so that they get moved off screen while not in use, its for the plush and move select screen. The game over screen wont be so hard.
+        PlushView = false;
+        UI.text = "";
+        TopUI.text = "";
+        StartCoroutine("Loading");
     }
 
     void Update()
@@ -109,6 +104,9 @@ public class BattleManager : MonoBehaviour
         PowerUI.text =  "" + pstat.Power;
         DefenseUI.text =  "" + pstat.Defense;
         SpeedUI.text =  "" + pstat.Speed;
+        if (PlushView == true)
+        {plush.PlushFront = pstat.PlushChoice;}
+
 
         if (MenuSummon && estat.Dizzy == 2) {DizzyCheck = 2;}
         else {DizzyCheck = 1;}
@@ -151,7 +149,7 @@ public class BattleManager : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.T)) {Instantiate(Screens[0], transform);}
 
         //PLUSH SELECTION FUNCTIONS
-        if (Input.GetKeyDown(KeyCode.E) && pstat.PlushSelect == true) {Instantiate(Screens[0], transform); pstat.PlushSelect = false; MenuSelect = false; StartCoroutine("Starting");}
+        if (Input.GetKeyDown(KeyCode.E) && pstat.PlushSelect == true) {Instantiate(Backgrounds[5], transform); pstat.PlushSelect = false; MenuSelect = false; StartCoroutine("Starting");}
         if (pstat.PlushSelect == true) {Chance = 0 + pstat.PlushChoice;}
 
         if (pstat.PlushSelect == true && Chance == 0) {UI.text = "Cat Plush! This choice will last for the rest of the game until you lose!";}
@@ -269,7 +267,7 @@ public class BattleManager : MonoBehaviour
         if (Defeat == true)
         {
             BattleEnd = true;
-            Instantiate(Screens[0], transform);
+            Instantiate(Backgrounds[5], transform);
             UI.text = "The Player has been defeated!";
             Debug.Log("Player loses the fight");
             yield return new WaitForSeconds(2f);
@@ -486,17 +484,19 @@ public class BattleManager : MonoBehaviour
     {
         MoveSelect = true;
         MenuSelect = false;
-        Instantiate(Screens[1], transform);
         MoveSummon();
     }
     //DOOM, MUAHAHAHAHHAHAHA!
     void GameOver()
     {
-        Instantiate(Screens[2], transform);
+        PlushView = true;
+        //Instantiate(Plushes[3], transform); PROBLEM WITH THIS GUY <<<<<
+        Instantiate(Backgrounds[2], transform);
     }
     //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
     void Summon()
     {
+        Instantiate(Backgrounds[0], transform);
         MenuSummon = true;
         BattleEnd = false;
         pstat.PlushSelect = false;
@@ -519,6 +519,7 @@ public class BattleManager : MonoBehaviour
 
     void Destruction()
     {
+        PlushView = false;
         Health = 16;
         pstat.ResetBool = true;
         TopUI.text = "";
@@ -544,6 +545,9 @@ public class BattleManager : MonoBehaviour
     }
     void StartingSummon()
     {
+        PlushView = true;
+        //Instantiate(Plushes[3], transform); PROBLEM WITH THIS GUY <<<<<
+        Instantiate(Backgrounds[1], transform);
         pstat.PlushSelect = true;
         TopUI.text = "Plush Select (A: Left, D: Right) When you're ready, press (E) to start!";
         Instantiate(UIBlock[0], transform);
@@ -557,7 +561,7 @@ public class BattleManager : MonoBehaviour
 
     void MoveSummon()
     {
-
+        Instantiate(Backgrounds[1], transform);
         Instantiate(UIBlock[0], transform);
         Instantiate(UIBlock[1], transform);
         Instantiate(UIBlock[2], transform);
@@ -566,6 +570,16 @@ public class BattleManager : MonoBehaviour
         ActiveButtons[1] = Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
         ActiveButtons[2] = Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
         ActiveButtons[3] = Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
-        hm.UpdateHearts(Health);
+    }
+    public IEnumerator Loading()
+    {
+        Instantiate(Backgrounds[4], transform);
+        pstat = GetComponent<PlayerStats>();
+        ButtonA = 0; ButtonB = 1; ButtonC = 2; ButtonD = 3;
+        Defeat = false; MenuSummon = false; MenuSelect = true; Health = 16;
+        Instantiate(Backgrounds[5], transform);
+        yield return new WaitForSeconds(2f);
+        Destruction();
+        StartingSummon();
     }
 }
