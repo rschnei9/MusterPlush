@@ -14,12 +14,12 @@ public class IconDefense : MonoBehaviour
 
     void Update()
     {
-        if (bat.MenuSummon == true)
+        if (bat.MenuSummon == true || bat.StatSelect == true)
         {
         if (plstat.DUP == 2) {Icon[0].sprite = IconStates[1];}
         if (plstat.DDOWN == 2) {Icon[0].sprite = IconStates[2];}
-        if (plstat.DUP == 2 && plstat.PDOWN == 2) {Icon[0].sprite = IconStates[0];}
-        if (plstat.DUP != 2 && plstat.PDOWN != 2) {Icon[0].sprite = IconStates[0];}
+        if (plstat.DUP == 2 && plstat.DDOWN == 2) {Icon[0].sprite = IconStates[0];}
+        if (plstat.DUP != 2 && plstat.DDOWN != 2) {Icon[0].sprite = IconStates[0];}
         }
     }
 }

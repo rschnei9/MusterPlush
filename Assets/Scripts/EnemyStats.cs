@@ -32,6 +32,8 @@ public class EnemyStats : MonoBehaviour
     public bool BurningE;
     public bool FreezeE;
 
+    public bool RoundRefresh;
+
     void Start()
     {
         BASEPower = Power;
@@ -60,6 +62,8 @@ public class EnemyStats : MonoBehaviour
         if (DizzyE == true) { DizzyE = false; SpinIT(); }
         if (BurningE == true) { BurningE = false; BurnIT(); }
         if (FreezeE == true) { FreezeE = false; FreezeIT(); }
+
+        if (RoundRefresh == true) {RoundRefresh = false; Refresh();}
     }
 
     void SpinIT()

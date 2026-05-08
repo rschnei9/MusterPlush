@@ -14,7 +14,7 @@ public class IconSpeed : MonoBehaviour
 
     void Update()
     {
-        if (bat.MenuSummon == true)
+        if (bat.MenuSummon == true || bat.StatSelect == true)
         {
         if (plstat.SUP == 2) {Icon[0].sprite = IconStates[1];}
         if (plstat.SDOWN == 2) {Icon[0].sprite = IconStates[2];}

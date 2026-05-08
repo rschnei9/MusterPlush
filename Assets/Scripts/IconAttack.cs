@@ -14,7 +14,7 @@ public class IconAttack : MonoBehaviour
 
     void Update()
     {
-        if (bat.MenuSummon == true)
+        if (bat.MenuSummon == true || bat.StatSelect == true)
         {
         if (plstat.PUP == 2) {Icon[0].sprite = IconStates[1];}
         if (plstat.PDOWN == 2) {Icon[0].sprite = IconStates[2];}
