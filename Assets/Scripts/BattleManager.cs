@@ -18,6 +18,7 @@ public class BattleManager : MonoBehaviour
     //THESE VARIABLES ARE FOR THE PLAYER
     [Header("Player Management")]
     public GameObject[] Plushes;
+    public GameObject[] PlushFront;
     public float Player;
     public int Health;
 
@@ -173,6 +174,23 @@ public class BattleManager : MonoBehaviour
                 {SelectMoveR();}
             if (Input.GetKeyDown(KeyCode.A) && MoveSelect == true)
                 {SelectMoveL();}
+            if (pstat.PlushRoll == true)
+            {
+                pstat.PlushRoll = false;
+                if (pstat.PlushSelect == true)
+                {
+                    Destruction();
+                    MenuSelect = true;
+                    PlushView = true;
+                    Instantiate(Backgrounds[1], transform);
+                    pstat.PlushSelect = true;
+                    TopUI.text = "Plush Select (A: Left, D: Right) When you're ready, press (E) to start!";
+                    Instantiate(UIBlock[0], transform);
+                    Instantiate(UIBlock[1], transform);
+                    Instantiate(UIBlock[2], transform);
+                    Instantiate(PlushFront[pstat.PlushChoice], transform);
+                }
+            }
             
         //MOVE SELECTION
         if (Input.GetKeyDown(KeyCode.E) && MenuSelect == true && Defeat == false && pstat.PlushSelect == false && estat.EnemyDefeat == false)
@@ -328,6 +346,7 @@ public class BattleManager : MonoBehaviour
         if (MoveABCD == 0)
         {
             //Debug.Log("Player Move 1");
+            Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,6);
 
@@ -337,29 +356,36 @@ public class BattleManager : MonoBehaviour
             if (Chance == 6) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Basic Attack!";}
             if (Chance != 6) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Basic Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
-            Damage = 0;
+            Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 1)
         {
             //Debug.Log("Player Move 2");
+            Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Power for 3 turns!";
             pstat.PowerU = true;
+            Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 2)
         {
             //Debug.Log("Player Move 3");
+            Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Defense for 3 turns!";
             pstat.DefenseU = true;
+            Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 3)
         {
             //Debug.Log("Player Move 4");
+            Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Speed for 3 turns!";
             pstat.SpeedU = true;
+            Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 4)
         {
             //Debug.Log("Player Move 5");BURN
+            Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,9);
 
@@ -375,11 +401,12 @@ public class BattleManager : MonoBehaviour
             if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and burned the Enemy! The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
             if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
-            Damage = 0;
+            Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 5)
         {
             //Debug.Log("Player Move 6");FREEZE
+            Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,9);
 
@@ -395,10 +422,11 @@ public class BattleManager : MonoBehaviour
             if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and froze the Enemy! The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
             if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
-            Damage = 0;
+            Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 6)
         {
+            Chance = 50; ChanceTwo = 50;
             //Debug.Log("Player Move 7");DIZZY
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,9);
@@ -415,10 +443,11 @@ public class BattleManager : MonoBehaviour
             if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and bewildered the Enemy! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
             if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
-            Damage = 0;
+            Damage = 0; Chance = 50;
         }
         if (MoveABCD == 7)
         {
+            Chance = 50; ChanceTwo = 50;
             //Debug.Log("Player Move 8");REDSWORD
             Damage = (pstat.Power - estat.Defense/2) + 3;
             Chance = Random.Range(0,12);
@@ -430,20 +459,24 @@ public class BattleManager : MonoBehaviour
             if (Chance != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Strong Attack!";}
             Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0;
+            Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 8)
         {
             //Debug.Log("Player Move 9");
+            Chance = 50; ChanceTwo = 50;
             Chance = Random.Range(2,7);
             Health = (int) Health + (int) Chance;
             UI.text = "The Player recovered " + Chance + " Health from Random Heal!";
+            Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 9)
         {
             //Debug.Log("Player Move 10");
+            Chance = 50; ChanceTwo = 50;
             Health = Health + 5;
             UI.text = "The Player recovered " + 5 + " Health from Consistent Heal!";
-
+            Chance = 50; ChanceTwo = 50;
         }
     }
 
@@ -453,6 +486,7 @@ public class BattleManager : MonoBehaviour
         if (EnemyChoice == 1 || EnemyChoice == 2 || EnemyChoice == 3 || EnemyChoice == 4)
         {
             //Debug.Log("Enemy Move 1");
+            Chance = 50; ChanceTwo = 50;
             Damage = estat.Power - pstat.Defense/2;
             Chance = Random.Range(0,12);
 
@@ -462,28 +496,35 @@ public class BattleManager : MonoBehaviour
             if (Chance == 1) {UI.text = "The Enemy landed a critical hit! The Player took " + (int) Damage + " Damage from the Enemy Attack!";}
             if (Chance != 1) {UI.text = "The Player took " + (int) Damage + " Damage from the Enemy Attack!";}
             Debug.Log("Player took" + Damage + "damage");
-            Damage = 0;
+            Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 5)
         {
+            Chance = 50;
             UI.text = "The Player had their Power cut in half by the Enemy's curse, lasting for 3 turns!";
             Debug.Log("Enemy lowered Player Power");
             pstat.PowerD = true;
+            Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 6)
         {
+            Chance = 50;
             UI.text = "The Player had their Defense cut in half by the Enemy's curse, lasting for 3 turns!";
             Debug.Log("Enemy lowered Player Defense");
             pstat.DefenseD = true;
+            Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 7)
         {
+            Chance = 50; ChanceTwo = 50;
             UI.text = "The Player had their Speed cut in half by the Enemy's curse, lasting for 3 turns!";
             Debug.Log("Enemy lowered Player Speed");
             pstat.SpeedD = true;
+            Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 8)
         {
+            Chance = 50; ChanceTwo = 50;
             Debug.Log("Defense Ignorant Move");
             Damage = estat.Power - pstat.Defense/3;
             if (Damage <= 1) {Damage = 1;}
@@ -492,12 +533,15 @@ public class BattleManager : MonoBehaviour
             if (Chance != 1) {UI.text = "The Player took " + (int) Damage + " Damage from the Enemies Defense Ignorant Attack!";}
             Debug.Log("Player took" + Damage + "damage");
             Damage = 0;
+            Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 9)
         {
+            Chance = 50; ChanceTwo = 50;
             UI.text = "The Enemy healed themselves by " + estat.Health + " Health!";
             Debug.Log("Enemy Move 9");
             estat.Health = estat.Health + 4;
+            Chance = 50; ChanceTwo = 50;
         }
     }
 
@@ -510,13 +554,14 @@ public class BattleManager : MonoBehaviour
     void GameOver()
     {
         PlushView = true;
-        //Instantiate(Plushes[3], transform); PROBLEM WITH THIS GUY <<<<<
+        Instantiate(PlushFront[pstat.PlushChoice], transform); //PROBLEM WITH THIS GUY <<<<<
         Instantiate(Backgrounds[2], transform);
     }
     //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
     void Summon()
     {
         Instantiate(Backgrounds[0], transform);
+        Instantiate(Backgrounds[6], transform);
         MenuSummon = true;
         pstat.PlushSelect = false;
         BattleEnd = false;
@@ -542,6 +587,9 @@ public class BattleManager : MonoBehaviour
         estat.BASEPower += ModP;
         estat.BASEDefense += ModD;
         estat.BASESpeed += ModS;
+        estat.Power += ModP;
+        estat.Defense += ModD;
+        estat.Speed += ModS;
         estat.RoundRefresh = true;
         MenuStart();
     }
@@ -575,7 +623,8 @@ public class BattleManager : MonoBehaviour
     void StartingSummon()
     {
         PlushView = true;
-        //Instantiate(Plushes[3], transform); PROBLEM WITH THIS GUY <<<<<
+        Instantiate(PlushFront[pstat.PlushChoice], transform); //PROBLEM WITH THIS GUY <<<<<
+        Instantiate(Backgrounds[6], transform);
         Instantiate(Backgrounds[1], transform);
         pstat.PlushSelect = true;
         TopUI.text = "Plush Select (A: Left, D: Right) When you're ready, press (E) to start!";
@@ -585,13 +634,17 @@ public class BattleManager : MonoBehaviour
     }
     public IEnumerator Starting()
     {yield return new WaitForSeconds(1.5f); Destruction(); MenuSelect = true; Summon();}
-    public IEnumerator MoveStarting()
-    {estat.EnemyDefeat = false; yield return new WaitForSeconds(1.5f); Destruction(); MenuSelect = true; MoveSummon();}
 
     void MoveSummon()
     {
+        Instantiate(Backgrounds[6], transform);
         ButtonE = Random.Range(0,9);
-        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {MoveSummon();}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = 0;}
         else {MoveSelect = true; MoveSelection();}
     }
 
@@ -608,6 +661,7 @@ public class BattleManager : MonoBehaviour
         ActiveButtons[1] = Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
         ActiveButtons[2] = Instantiate(Buttons[ButtonC], new Vector3(-5.3f, -0.75f, 0), Quaternion.identity, transform);
         ActiveButtons[3] = Instantiate(Buttons[ButtonD], new Vector3(-3.9f, -0.75f, 0), Quaternion.identity, transform);
+        Debug.Log("Started Hovering Button A"); ActiveButtons[0].GetComponent<MoveUpdate>().Hover(); MoveABCD = ButtonA; ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();
         DisplayMove();
     }
     public IEnumerator StatUpgrade()
@@ -618,6 +672,7 @@ public class BattleManager : MonoBehaviour
         UI.text = "Gain a +2 boost to a stat of your choice. A random stat will be selected to gain +1.";
         StatSelect = true;
         Instantiate(Backgrounds[1], transform);
+        Instantiate(PlushFront[pstat.PlushChoice], transform);
         Instantiate(UIBlock[0], transform);
         Instantiate(UIBlock[1], transform);
         Instantiate(UIBlock[2], transform);
@@ -632,15 +687,16 @@ public class BattleManager : MonoBehaviour
         if (ChanceTwo == 0) {pstat.BASEPower += 2;}
         if (ChanceTwo == 1) {pstat.BASEDefense += 2;}
         if (ChanceTwo == 2) {pstat.BASESpeed += 2;}
-        yield return new WaitForSeconds(0.15f); Chance = Random.Range(0,2); yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.15f); Chance = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
         if (Chance == 0) {pstat.BASEPower += 1;}
         if (Chance == 1) {pstat.BASEDefense += 1;}
         if (Chance == 2) {pstat.BASESpeed += 1;}
-        yield return new WaitForSeconds(0.15f); ChanceTwo = Random.Range(0,2); yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.15f); ChanceTwo = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
         if (ChanceTwo == 0) {ModP += 2;}
         if (ChanceTwo == 1) {ModD += 2;}
         if (ChanceTwo == 2) {ModS += 2;}
-        yield return new WaitForSeconds(0.15f); Chance = Random.Range(0,2); yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.15f); Chance = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
+        if (Chance == ChanceTwo) {Chance = 44;}
         if (Chance == 0) {ModP += 1;}
         if (Chance == 1) {ModD += 1;}
         if (Chance == 2) {ModS += 1;}

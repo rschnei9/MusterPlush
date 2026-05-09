@@ -107,7 +107,7 @@ MonoBehaviour:
   Conditions: []
   Power: 5
   Defense: 5
-  Speed: 4
+  Speed: 5
   BASEPower: 0
   BASEDefense: 0
   BASESpeed: 0
@@ -126,3 +126,4 @@ MonoBehaviour:
   DizzyE: 0
   BurningE: 0
   FreezeE: 0
+  RoundRefresh: 0

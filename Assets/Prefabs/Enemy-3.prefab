@@ -104,7 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede34a8bbbd9bd549b7eaf202074bbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  Power: 4
+  Conditions: []
+  Power: 3
   Defense: 4
   Speed: 6
   BASEPower: 0
@@ -115,3 +116,14 @@ MonoBehaviour:
   EnemyMoveA: 0
   EnemyMoveB: 0
   EnemyMoveC: 0
+  Dizzy: 0
+  Burning: 0
+  Freeze: 0
+  DizzyT: 0
+  BurningT: 0
+  FreezeT: 0
+  TurnEnd: 0
+  DizzyE: 0
+  BurningE: 0
+  FreezeE: 0
+  RoundRefresh: 0

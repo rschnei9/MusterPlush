@@ -46,6 +46,7 @@ public class PlayerStats : MonoBehaviour
     public GameObject[] Timers;
     public bool TimerFix;
     public bool ResetBool;
+    public bool PlushRoll;
 
     void Start()
     {
@@ -56,13 +57,13 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 0) {BunnyP();}
-        else if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 1) {CatP();}
-        else if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 2) {BearP();}
+        if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 0) {BunnyP(); PlushRoll = true;}
+        else if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 1) {CatP(); PlushRoll = true;}
+        else if (Input.GetKeyDown(KeyCode.A) && PlushSelect == true && PlushChoice == 2) {BearP(); PlushRoll = true;}
 
-        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 0) {BearP();}
-        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 1) {BunnyP();}
-        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 2) {CatP();}
+        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 0) {BearP(); PlushRoll = true;}
+        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 1) {BunnyP(); PlushRoll = true;}
+        else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 2) {CatP(); PlushRoll = true;}
 
         //Cat Selected
         void CatP() {PlushChoice = 0; BASEPower = 5; BASEDefense = 2; BASESpeed = 9; Refresh();}
@@ -93,7 +94,7 @@ public class PlayerStats : MonoBehaviour
         if (SpeedD == true)
         { SpeedD = false; SpeedDOWN (); }
 
-        if (ResetBool == true) {ResetBool = false; Reset();}
+        if (ResetBool == true) {ResetBool = false; Refresh(); Reset();}
     }
 
     void PowerUP()
