@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class BattleManager : MonoBehaviour
@@ -94,17 +95,33 @@ public class BattleManager : MonoBehaviour
     public bool TimerDeath;
 
     public bool PlushView;
+    public bool DefeatMenu;
 
     void Start()
     {
+        pstat = GetComponent<PlayerStats>();
+        DefeatMenu = false;
         PlushView = false;
         UI.text = "";
         TopUI.text = "";
+        //Instantiate(Backgrounds[4], transform);
+        //ButtonA = 0; ButtonB = 1; ButtonC = 2; ButtonD = 3;
+        //Defeat = false; MenuSummon = false; MenuSelect = true; Health = 16;
         StartCoroutine("Loading");
+        //Destruction();
+        //StartingSummon();
     }
 
     void Update()
     {   
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && DefeatMenu == true)
+        {
+            StartCoroutine("UnLoading");
+        }
         //Statistic Updates UI
         PowerUI.text =  "" + pstat.Power;
         DefenseUI.text =  "" + pstat.Defense;
@@ -554,6 +571,7 @@ public class BattleManager : MonoBehaviour
     void GameOver()
     {
         PlushView = true;
+        DefeatMenu = true;
         Instantiate(PlushFront[pstat.PlushChoice], transform); //PROBLEM WITH THIS GUY <<<<<
         Instantiate(Backgrounds[2], transform);
     }
@@ -707,12 +725,20 @@ public class BattleManager : MonoBehaviour
     public IEnumerator Loading()
     {
         Instantiate(Backgrounds[4], transform);
-        pstat = GetComponent<PlayerStats>();
+        Instantiate(Backgrounds[6], transform);
         ButtonA = 0; ButtonB = 1; ButtonC = 2; ButtonD = 3;
         Defeat = false; MenuSummon = false; MenuSelect = true; Health = 16;
+        yield return new WaitForSeconds(2f);
         Instantiate(Backgrounds[5], transform);
         yield return new WaitForSeconds(2f);
         Destruction();
         StartingSummon();
+    }
+    public IEnumerator UnLoading()
+    {
+        Instantiate(Backgrounds[5], transform);
+        yield return new WaitForSeconds(2f);
+        string MusterPlush = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(MusterPlush);
     }
 }

@@ -1008,13 +1008,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
   hm: {fileID: 1235866347}
   plush: {fileID: 5070836333868933810, guid: cffcbfd83a7e178469a988e992f171b5, type: 3}
-  PlayerManager: {fileID: 0}
-  EnemyManager: {fileID: 0}
+  PlayerManager: {fileID: 1235866344}
+  EnemyManager: {fileID: 1235866344}
   Plushes:
   - {fileID: 994363034020297892, guid: 710599af87066ef4d80025cdab10d8de, type: 3}
   - {fileID: 994363034020297892, guid: 562ce98596915474f9e7fa2019bcc80a, type: 3}
   - {fileID: 994363034020297892, guid: 59a0d69cf2e40984dab90131c5670d0e, type: 3}
   - {fileID: 8307601291078633236, guid: cffcbfd83a7e178469a988e992f171b5, type: 3}
+  PlushFront:
+  - {fileID: 4533735752304762714, guid: bfe3c8b7a1f750048a035ae9e98b4a9e, type: 3}
+  - {fileID: 6548287670193452270, guid: bd3a0928e26f0c6468770f8156a0819b, type: 3}
+  - {fileID: 6472234935184423347, guid: 0a76c64f54bbec647a717812d8aa10d0, type: 3}
   Player: 0
   Health: 0
   Enemies:
@@ -1027,6 +1031,9 @@ MonoBehaviour:
   - {fileID: 446157637771789437, guid: 694dcb3a2613c0b42880b47ff1624cdc, type: 3}
   Enemy: 0
   EnemyChoice: 0
+  ModP: 0
+  ModD: 0
+  ModS: 0
   Buttons:
   - {fileID: 143246079317017094, guid: fa9e3fe80512cf6479c4791cb31a62c0, type: 3}
   - {fileID: 5535493265731110349, guid: cf66b18f937646045bfa739f27abf856, type: 3}
@@ -1056,6 +1063,7 @@ MonoBehaviour:
   ButtonC: 0
   ButtonD: 0
   MoveABCD: 0
+  ButtonE: 0
   EnemyA: 0
   EnemyB: 0
   EnemyC: 0
@@ -1089,6 +1097,7 @@ MonoBehaviour:
   - {fileID: 4172668373438289627, guid: e6acfc831a5423141bb4075001c9ec8e, type: 3}
   - {fileID: 5178036976475085942, guid: 81f1ae0f80e17034a9fc6d46ad0457e3, type: 3}
   - {fileID: 1129922474297343953, guid: 76489c68dce4da840af6b423e11e8d70, type: 3}
+  - {fileID: 1129922474297343953, guid: a4c5b37a98ee6dd4d832a7b6a848d629, type: 3}
   TopUI: {fileID: 1256781047}
   UI: {fileID: 1105577476}
   PowerUI: {fileID: 447121049}
@@ -1102,6 +1111,7 @@ MonoBehaviour:
   FreezeTB: 0
   TimerDeath: 0
   PlushView: 0
+  DefeatMenu: 0
 --- !u!4 &1235866346
 Transform:
   m_ObjectHideFlags: 0
@@ -1192,6 +1202,7 @@ MonoBehaviour:
   - {fileID: 561954436531042589, guid: db96ae96196787541bfb91ffc004849b, type: 3}
   TimerFix: 0
   ResetBool: 0
+  PlushRoll: 0
 --- !u!1 &1256781045
 GameObject:
   m_ObjectHideFlags: 0
