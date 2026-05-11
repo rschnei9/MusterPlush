@@ -565,7 +565,8 @@ public class BattleManager : MonoBehaviour
     //PLAYER GETS A NEW MOVE
     void GainingMove()
     {
-        Destruction(); MenuSelect = true; MoveSummon();
+        if (MoveSelect == false)
+        {Destruction(); MenuSelect = true; MoveSummon();}
     }
     //DOOM, MUAHAHAHAHHAHAHA!
     void GameOver()
@@ -656,12 +657,12 @@ public class BattleManager : MonoBehaviour
     void MoveSummon()
     {
         Instantiate(Backgrounds[6], transform);
-        ButtonE = Random.Range(0,9);
-        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
-        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
-        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
-        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
-        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(0,9);}
+        ButtonE = Random.Range(1,10);
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(1,10);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(1,10);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(1,10);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(1,10);}
+        if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(1,10);}
         if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = 0;}
         else {MoveSelect = true; MoveSelection();}
     }
