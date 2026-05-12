@@ -792,38 +792,203 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         if (MoveABCD == 0)
         {
-            Debug.Log("Basic Attack");
-            PlayerManager.transform.position = new Vector3(0, 1, 0);
-            yield return new WaitForSeconds(1.05f);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.37f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -1, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.77f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1.2f, 0); EnemyManager.transform.position = new Vector3(0.1f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1.2f, 0); EnemyManager.transform.position = new Vector3(-0.1f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -1f, 0);
+            yield return new WaitForSeconds(0.05f);
             PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 1)
         {
-            Debug.Log("POW UP Move");
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.4f, -2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.4f, -2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.4f, -2.1f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.4f, -2.1f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 2)
         {
-            Debug.Log("DEF UP Move");
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.1f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.1f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 3)
         {
-            Debug.Log("SPD UP Move");
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.7f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.7f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.9f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.5f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.9f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 4)
         {
-            Debug.Log("Brn Move");
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, 1, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.77f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, 1.2f, 0); EnemyManager.transform.position = new Vector3(0.3f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, 1.2f, 0); EnemyManager.transform.position = new Vector3(-0.3f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -1f, 0);
+            yield return new WaitForSeconds(0.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 5)
         {
-            Debug.Log("Frz Move");
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.55f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.55f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.7f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.7f, -2.65f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.65f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.65f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.9f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, 1, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.77f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, 1.2f, 0); EnemyManager.transform.position = new Vector3(0.3f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, 1.2f, 0); EnemyManager.transform.position = new Vector3(-0.3f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -1f, 0);
+            yield return new WaitForSeconds(0.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 6)
         {
-            Debug.Log("Bwl Move");
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.2f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.1f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.5f, -2.2f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.4f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.5f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.2f, -2.3f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0f, 1, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0f, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.77f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0f, 1.2f, 0); EnemyManager.transform.position = new Vector3(0.3f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0f, 1.2f, 0); EnemyManager.transform.position = new Vector3(-0.3f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0f, 1.1f, 0); EnemyManager.transform.position = new Vector3(0, 2.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -1f, 0);
+            yield return new WaitForSeconds(0.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 7)
         {
-            Debug.Log("Redsword Move");
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.7f, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.55f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.55f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.9f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.5f, -2.65f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.65f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.9f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.8f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1.2f, 0); EnemyManager.transform.position = new Vector3(0, 2.77f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1.3f, 0); EnemyManager.transform.position = new Vector3(0.8f, 2.95f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 1.1f, 0); EnemyManager.transform.position = new Vector3(-0.8f, 2.95f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, 0f, 0); EnemyManager.transform.position = new Vector3(-0.6f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -1.5f, 0); EnemyManager.transform.position = new Vector3(-0.6f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.35f, 0); EnemyManager.transform.position = new Vector3(0, 2.75f, 0);
+            yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
         }
         if (MoveABCD == 8)
         {
@@ -840,6 +1005,28 @@ public class BattleManager : MonoBehaviour
         if (EnemyChoice == 1 || EnemyChoice == 2 || EnemyChoice == 3 || EnemyChoice == 4)
         {
             Debug.Log("Enemy Attack");
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.77f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.79f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.81f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.1f, 2.81f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(-0.1f, 2.81f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.1f, 2.81f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(-0.1f, 2.81f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.81f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.5f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 1f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -1f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -2f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -2.25f, 0); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -2.35f, 0); PlayerManager.transform.position = new Vector3(0.1f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -2.35f, 0); PlayerManager.transform.position = new Vector3(-0.1f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -2f, 0); PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -1f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 0f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 1.5f, 0);
+            yield return new WaitForSeconds(0.05f);
+            EnemyManager.transform.position = new Vector3(0, 2.75f, 0);
         }
         if (EnemyChoice == 5)
         {
@@ -858,6 +1045,28 @@ public class BattleManager : MonoBehaviour
         if (EnemyChoice == 8)
         {
             Debug.Log("Defense smash");
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.8f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.8f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.1f, 2.7f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(-0.1f, 2.8f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.1f, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(-0.1f, 3.1f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.9f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.8f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 3.0f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.1f, 3.1f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(-0.1f, 3.1f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.3f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -2.25f, 0); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(-0.1f, -2.35f, 0); PlayerManager.transform.position = new Vector3(0.1f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.1f, -2.35f, 0); PlayerManager.transform.position = new Vector3(-0.1f, -2.7f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -2f, 0); PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, -1f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 0f, 0);
+            yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 1.5f, 0);
+            yield return new WaitForSeconds(0.05f);
+            EnemyManager.transform.position = new Vector3(0, 2.75f, 0);
         }
         if (EnemyChoice == 9)
         {
