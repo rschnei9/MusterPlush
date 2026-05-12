@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   Conditions: []
-  Power: 2
+  Power: 1
   Defense: 1
   Speed: 10
   BASEPower: 0

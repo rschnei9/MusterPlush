@@ -31,6 +31,7 @@ public class BattleManager : MonoBehaviour
     public int ModP;
     public int ModD;
     public int ModS;
+    public int HBuff;
 
     //THESE ARE FOR THE BATTLE UI
     [Header("User Interface")]
@@ -81,7 +82,9 @@ public class BattleManager : MonoBehaviour
     public GameObject[] Backgrounds;
 
     public TextMeshProUGUI TopUI;
+    public TextMeshProUGUI StatUI;
     public TextMeshProUGUI UI;
+    public TextMeshProUGUI MoveUI;
     public TextMeshProUGUI PowerUI;
     public TextMeshProUGUI DefenseUI;
     public TextMeshProUGUI SpeedUI;
@@ -102,8 +105,11 @@ public class BattleManager : MonoBehaviour
         pstat = GetComponent<PlayerStats>();
         DefeatMenu = false;
         PlushView = false;
+        MenuSelect = false;
         UI.text = "";
+        StatUI.text = "";
         TopUI.text = "";
+        MoveUI.text = "";
         //Instantiate(Backgrounds[4], transform);
         //ButtonA = 0; ButtonB = 1; ButtonC = 2; ButtonD = 3;
         //Defeat = false; MenuSummon = false; MenuSelect = true; Health = 16;
@@ -233,6 +239,8 @@ public class BattleManager : MonoBehaviour
     public IEnumerator TurnStart()
     {
         Debug.Log("Start of the turn!");
+        PlayerMove = false;
+        EnemyMove = false;
         ActiveButtons[0].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[1].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[2].GetComponent<MoveUpdate>().UnHover(); ActiveButtons[3].GetComponent<MoveUpdate>().UnHover();
         yield return new WaitForSeconds(0.15f);
         StartCoroutine("TurnSpeed");
@@ -244,9 +252,9 @@ public class BattleManager : MonoBehaviour
             Debug.Log("Speed Tied!"); int flipcoin = Random.Range(0,2);
 
             if (flipcoin == 0)
-                {PlayerMove = true; Debug.Log("Player First!");}
+                {PlayerMove = true; Debug.Log("Player First!"); UI.text = "Speed tie! Player won coin toss.";}
             if (flipcoin == 1)
-                {EnemyMove = true; Debug.Log("Enemy First!");}
+                {EnemyMove = true; Debug.Log("Enemy First!"); UI.text = "Speed tie! Enemy won coin toss.";}
         }
         if (pstat.Speed > estat.Speed)
             {PlayerMove = true; Debug.Log("Player First!"); UI.text = "The Player is going first this turn!";}
@@ -306,6 +314,8 @@ public class BattleManager : MonoBehaviour
     {
         if (BattleEnd == false)
         {
+            PlayerMove = false;
+            EnemyMove = false;
             pstat.TurnEnd = true;
             estat.TurnEnd = true;
             yield return new WaitForSeconds(0.15f);
@@ -362,6 +372,7 @@ public class BattleManager : MonoBehaviour
     {
         if (MoveABCD == 0)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 1");
             Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
@@ -377,6 +388,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 1)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 2");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Power for 3 turns!";
@@ -385,6 +397,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 2)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 3");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Defense for 3 turns!";
@@ -393,6 +406,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 3)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 4");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Speed for 3 turns!";
@@ -401,6 +415,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 4)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 5");BURN
             Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
@@ -422,6 +437,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 5)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 6");FREEZE
             Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
@@ -443,6 +459,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 6)
         {
+            StartCoroutine("AnimatedPlayer");
             Chance = 50; ChanceTwo = 50;
             //Debug.Log("Player Move 7");DIZZY
             Damage = pstat.Power - estat.Defense/2;
@@ -464,6 +481,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 7)
         {
+            StartCoroutine("AnimatedPlayer");
             Chance = 50; ChanceTwo = 50;
             //Debug.Log("Player Move 8");REDSWORD
             Damage = (pstat.Power - estat.Defense/2) + 3;
@@ -480,15 +498,17 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 8)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 9");
             Chance = 50; ChanceTwo = 50;
-            Chance = Random.Range(2,7);
+            Chance = Random.Range(2,8);
             Health = (int) Health + (int) Chance;
             UI.text = "The Player recovered " + Chance + " Health from Random Heal!";
             Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 9)
         {
+            StartCoroutine("AnimatedPlayer");
             //Debug.Log("Player Move 10");
             Chance = 50; ChanceTwo = 50;
             Health = Health + 5;
@@ -502,6 +522,7 @@ public class BattleManager : MonoBehaviour
     {
         if (EnemyChoice == 1 || EnemyChoice == 2 || EnemyChoice == 3 || EnemyChoice == 4)
         {
+            StartCoroutine("AnimatedEnemy");
             //Debug.Log("Enemy Move 1");
             Chance = 50; ChanceTwo = 50;
             Damage = estat.Power - pstat.Defense/2;
@@ -517,6 +538,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 5)
         {
+            StartCoroutine("AnimatedEnemy");
             Chance = 50;
             UI.text = "The Player had their Power cut in half by the Enemy's curse, lasting for 3 turns!";
             Debug.Log("Enemy lowered Player Power");
@@ -525,6 +547,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 6)
         {
+            StartCoroutine("AnimatedEnemy");
             Chance = 50;
             UI.text = "The Player had their Defense cut in half by the Enemy's curse, lasting for 3 turns!";
             Debug.Log("Enemy lowered Player Defense");
@@ -533,6 +556,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 7)
         {
+            StartCoroutine("AnimatedEnemy");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player had their Speed cut in half by the Enemy's curse, lasting for 3 turns!";
             Debug.Log("Enemy lowered Player Speed");
@@ -541,6 +565,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 8)
         {
+            StartCoroutine("AnimatedEnemy");
             Chance = 50; ChanceTwo = 50;
             Debug.Log("Defense Ignorant Move");
             Damage = estat.Power - pstat.Defense/3;
@@ -554,10 +579,12 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 9)
         {
+            StartCoroutine("AnimatedEnemy");
             Chance = 50; ChanceTwo = 50;
-            UI.text = "The Enemy healed themselves by " + estat.Health + " Health!";
+            Chance = Random.Range(3,7);
+            estat.Health = estat.Health + Chance;
+            UI.text = "The Enemy healed themselves by " + Chance + " Health!";
             Debug.Log("Enemy Move 9");
-            estat.Health = estat.Health + 4;
             Chance = 50; ChanceTwo = 50;
         }
     }
@@ -593,7 +620,7 @@ public class BattleManager : MonoBehaviour
         EnemyManager = Instantiate(Enemies[Random.Range(0, Enemies.Count)], transform);
         estat = EnemyManager.GetComponent<EnemyStats>();
         //Player summon, player is assigned "p" stats
-        Instantiate(Plushes[pstat.PlushChoice], transform);
+        PlayerManager = Instantiate(Plushes[pstat.PlushChoice], transform);
         //Button Summons
         ActiveButtons[0] = Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
         ActiveButtons[1] = Instantiate(Buttons[ButtonB], new Vector3(-6.7f, -0.75f, 0), Quaternion.identity, transform);
@@ -609,6 +636,7 @@ public class BattleManager : MonoBehaviour
         estat.Power += ModP;
         estat.Defense += ModD;
         estat.Speed += ModS;
+        estat.Health += HBuff;
         estat.RoundRefresh = true;
         MenuStart();
     }
@@ -642,18 +670,18 @@ public class BattleManager : MonoBehaviour
     void StartingSummon()
     {
         PlushView = true;
+        StatUI.text = "Plush Select";
         Instantiate(PlushFront[pstat.PlushChoice], transform); //PROBLEM WITH THIS GUY <<<<<
         Instantiate(Backgrounds[6], transform);
         Instantiate(Backgrounds[1], transform);
         pstat.PlushSelect = true;
-        TopUI.text = "Plush Select (A: Left, D: Right) When you're ready, press (E) to start!";
+        TopUI.text = "Select a plush (A: Left, D: Right). When you're ready, press (E) to start!";
         Instantiate(UIBlock[0], transform);
         Instantiate(UIBlock[1], transform);
         Instantiate(UIBlock[2], transform);
     }
     public IEnumerator Starting()
-    {yield return new WaitForSeconds(1.5f); Destruction(); MenuSelect = true; Summon();}
-
+    {yield return new WaitForSeconds(1.5f); Destruction(); StatUI.text = ""; MenuSelect = true; Summon();}
     void MoveSummon()
     {
         Instantiate(Backgrounds[6], transform);
@@ -666,14 +694,26 @@ public class BattleManager : MonoBehaviour
         if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = 0;}
         else {MoveSelect = true; MoveSelection();}
     }
-
     void MoveSelection()
     {
         TopUI.text = "Press (E) to replace a move, or (Q) to pass and not take the new move.";
+        MoveUI.text = "Your new move!";
         Instantiate(Backgrounds[1], transform);
         Instantiate(UIBlock[0], transform);
         Instantiate(UIBlock[1], transform);
         Instantiate(UIBlock[2], transform);
+        Instantiate(UIBlock[3], transform);
+
+        if (ButtonE == 0) {MoveUI.text = "Damage the Enemy, compares your full Power stat against half of their Defense stat!";}
+        if (ButtonE == 1) {MoveUI.text = "Double your Power stat for 3 turns, it starts counting down at the end of this turn!";}
+        if (ButtonE == 2) {MoveUI.text = "Double your Defense stat for 3 turns, it starts counting down at the end of this turn!";}
+        if (ButtonE == 3) {MoveUI.text = "Double your Speed stat for 3 turns, it starts counting down at the end of this turn!";}
+        if (ButtonE == 4) {MoveUI.text = "Damage the Enemy, you have a chance of burning them to half their Defense stat!";}
+        if (ButtonE == 5) {MoveUI.text = "Damage the Enemy, you have a chance of freezing them to half their Speed stat!";}
+        if (ButtonE == 6) {MoveUI.text = "Damage the Enemy, you have a chance of bewildering them to half their Power stat!";}
+        if (ButtonE == 7) {MoveUI.text = "Damage the Enemy, much stronger on average with a lower critical hit chance!";}
+        if (ButtonE == 8) {MoveUI.text = "Heal yourself between 2-7 Health, it's random every time you utilize this move!";}
+        if (ButtonE == 9) {MoveUI.text = "Heal yourself 5 Health on each use, try not to get out-damaged by the Enemy while healing!";}
 
         Instantiate(Buttons[ButtonE], new Vector3(0f, 1f, 0), Quaternion.identity, transform);
         ActiveButtons[0] = Instantiate(Buttons[ButtonA], new Vector3(-8.1f, -0.75f, 0), Quaternion.identity, transform);
@@ -687,8 +727,10 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.15f);
         Destruction();
-        TopUI.text = "Press (A) for Power, (S) for Defense, (D) for Speed, and (E) to confirm.";
+        MoveUI.text = "";
+        TopUI.text = "Press (A) for Power, (S) for Defense, (D) for Speed, and then (E) to confirm.";
         UI.text = "Gain a +2 boost to a stat of your choice. A random stat will be selected to gain +1.";
+        StatUI.text = "Stat Select";
         StatSelect = true;
         Instantiate(Backgrounds[1], transform);
         Instantiate(PlushFront[pstat.PlushChoice], transform);
@@ -706,21 +748,24 @@ public class BattleManager : MonoBehaviour
         if (ChanceTwo == 0) {pstat.BASEPower += 2;}
         if (ChanceTwo == 1) {pstat.BASEDefense += 2;}
         if (ChanceTwo == 2) {pstat.BASESpeed += 2;}
-        yield return new WaitForSeconds(0.15f); Chance = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.05f); Chance = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
         if (Chance == 0) {pstat.BASEPower += 1;}
         if (Chance == 1) {pstat.BASEDefense += 1;}
         if (Chance == 2) {pstat.BASESpeed += 1;}
-        yield return new WaitForSeconds(0.15f); ChanceTwo = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.05f); ChanceTwo = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
+        pstat.ResetBool = true;
         if (ChanceTwo == 0) {ModP += 2;}
         if (ChanceTwo == 1) {ModD += 2;}
         if (ChanceTwo == 2) {ModS += 2;}
-        yield return new WaitForSeconds(0.15f); Chance = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
-        if (Chance == ChanceTwo) {Chance = 44;}
-        if (Chance == 0) {ModP += 1;}
-        if (Chance == 1) {ModD += 1;}
-        if (Chance == 2) {ModS += 1;}
+        //yield return new WaitForSeconds(0.05f); Chance = Random.Range(0,3); yield return new WaitForSeconds(0.15f);
+        //if (Chance == 0) {ModP += 1;}
+        //if (Chance == 1) {ModD += 1;}
+        //if (Chance == 2) {ModS += 1;}
+        yield return new WaitForSeconds(0.05f);
+        HBuff += 1;
         pstat.ResetBool = true;
         MenuSelect = false;
+        yield return new WaitForSeconds(0.15f);
         StartCoroutine("Starting");
     }
     public IEnumerator Loading()
@@ -742,4 +787,82 @@ public class BattleManager : MonoBehaviour
         string MusterPlush = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(MusterPlush);
     }
+    public IEnumerator AnimatedPlayer()
+    {
+        yield return new WaitForSeconds(0.05f);
+        if (MoveABCD == 0)
+        {
+            Debug.Log("Basic Attack");
+            PlayerManager.transform.position = new Vector3(0, 1, 0);
+            yield return new WaitForSeconds(1.05f);
+            PlayerManager.transform.position = new Vector3(0, -2.5f, 0);
+        }
+        if (MoveABCD == 1)
+        {
+            Debug.Log("POW UP Move");
+        }
+        if (MoveABCD == 2)
+        {
+            Debug.Log("DEF UP Move");
+        }
+        if (MoveABCD == 3)
+        {
+            Debug.Log("SPD UP Move");
+        }
+        if (MoveABCD == 4)
+        {
+            Debug.Log("Brn Move");
+        }
+        if (MoveABCD == 5)
+        {
+            Debug.Log("Frz Move");
+        }
+        if (MoveABCD == 6)
+        {
+            Debug.Log("Bwl Move");
+        }
+        if (MoveABCD == 7)
+        {
+            Debug.Log("Redsword Move");
+        }
+        if (MoveABCD == 8)
+        {
+            Debug.Log("GrnHeal Move");
+        }
+        if (MoveABCD == 9)
+        {
+            Debug.Log("RedHeal Move");
+        }
+    }
+    public IEnumerator AnimatedEnemy()
+    {
+        yield return new WaitForSeconds(0.05f);
+        if (EnemyChoice == 1 || EnemyChoice == 2 || EnemyChoice == 3 || EnemyChoice == 4)
+        {
+            Debug.Log("Enemy Attack");
+        }
+        if (EnemyChoice == 5)
+        {
+            StartCoroutine("AnimatedEnemy");
+            Debug.Log("Power cut");
+        }
+        if (EnemyChoice == 6)
+        {
+            StartCoroutine("AnimatedEnemy");
+            Debug.Log("Defense cut");
+        }
+        if (EnemyChoice == 7)
+        {
+            Debug.Log("Speed cut");
+        }
+        if (EnemyChoice == 8)
+        {
+            Debug.Log("Defense smash");
+        }
+        if (EnemyChoice == 9)
+        {
+            Debug.Log("Enemy Healing");
+        }
+    }
+
 }

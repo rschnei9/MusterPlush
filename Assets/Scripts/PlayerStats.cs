@@ -50,7 +50,7 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        PlushChoice = 0; BASEPower = 5; BASEDefense = 2; BASESpeed = 9;
+        PlushChoice = 0; BASEPower = 6; BASEDefense = 2; BASESpeed = 8;
         Refresh();
         PlushSelect = true;
     }
@@ -66,11 +66,11 @@ public class PlayerStats : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D) && PlushSelect == true && PlushChoice == 2) {CatP(); PlushRoll = true;}
 
         //Cat Selected
-        void CatP() {PlushChoice = 0; BASEPower = 5; BASEDefense = 2; BASESpeed = 9; Refresh();}
+        void CatP() {PlushChoice = 0; BASEPower = 6; BASEDefense = 2; BASESpeed = 8; Refresh();}
         //Bear Selected
-        void BearP() {PlushChoice = 1; BASEPower = 6; BASEDefense = 7; BASESpeed = 3; Refresh();}
+        void BearP() {PlushChoice = 1; BASEPower = 5; BASEDefense = 8; BASESpeed = 3; Refresh();}
         //Bunny Selected
-        void BunnyP() {PlushChoice = 2; BASEPower = 4; BASEDefense = 5; BASESpeed = 7; Refresh();}
+        void BunnyP() {PlushChoice = 2; BASEPower = 4; BASEDefense = 6; BASESpeed = 6; Refresh();}
 
         //When the turn ends
         if (TurnEnd == true)

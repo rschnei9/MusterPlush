@@ -42,8 +42,8 @@ public class EnemyStats : MonoBehaviour
         Health = Random.Range(10, 16);
 
         EnemyMoveA = Random.Range(1,4);
-        EnemyMoveB = Random.Range(5,7);
-        EnemyMoveC = Random.Range(8,9);
+        EnemyMoveB = Random.Range(5,8);
+        EnemyMoveC = Random.Range(8,10);
         Refresh();
     }
 
