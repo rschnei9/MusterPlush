@@ -274,14 +274,14 @@ public class BattleManager : MonoBehaviour
         if (BattleEnd == false)
         {
         if (FirstTurn = true && PlayerMove == true && Defeat == false && estat.EnemyDefeat == false)
-            {PlayerMovePlan();}
+            {StartCoroutine("PlayerMovePlan");}
         if (FirstTurn = true && EnemyMove == true && Defeat == false && estat.EnemyDefeat == false)
             {
                 EnemyChoice = Random.Range(1,12);
                 if (EnemyChoice <= 7){EnemyChoice = estat.EnemyMoveA;}
                 if (EnemyChoice >= 8 && EnemyChoice <= 10){EnemyChoice = estat.EnemyMoveB;}
                 if (EnemyChoice >= 11 && EnemyChoice <= 12){EnemyChoice = estat.EnemyMoveC;}
-                EnemyMovePlan();
+                {StartCoroutine("EnemyMovePlan");}
             }
         }
             yield return new WaitForSeconds(2f);
@@ -294,14 +294,14 @@ public class BattleManager : MonoBehaviour
         if (BattleEnd == false)
         {
         if (SecondTurn = true && PlayerMove == false && Defeat == false && estat.EnemyDefeat == false)
-            {PlayerMovePlan();}
+            {StartCoroutine("PlayerMovePlan");}
         if (SecondTurn = true && EnemyMove == false && Defeat == false && estat.EnemyDefeat == false)
             {
                 EnemyChoice = Random.Range(1,12);
                 if (EnemyChoice <= 7){EnemyChoice = estat.EnemyMoveA;}
                 if (EnemyChoice >= 8 && EnemyChoice <= 10){EnemyChoice = estat.EnemyMoveB;}
                 if (EnemyChoice >= 11 && EnemyChoice <= 12){EnemyChoice = estat.EnemyMoveC;}
-                EnemyMovePlan();
+                {StartCoroutine("EnemyMovePlan");}
             }
         }
             yield return new WaitForSeconds(2f);
@@ -368,172 +368,169 @@ public class BattleManager : MonoBehaviour
             DisplayMove();
     }
 //EVERY POSSIBLE MOVE!
-    void PlayerMovePlan()
+    public IEnumerator PlayerMovePlan()
     {
         if (MoveABCD == 0)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 1");
             Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,6);
 
-            if (Chance == 6) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
+            if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
             if (Damage <= 1) {Damage = 1;}
+            if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Basic Attack!";}
+            if (Chance != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Basic Attack!";}
+
+            yield return new WaitForSeconds(0.75f);
             estat.Health = estat.Health - (int) Damage;
-            if (Chance == 6) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Basic Attack!";}
-            if (Chance != 6) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Basic Attack!";}
-            Debug.Log("Enemy took" + Damage + "damage");
             Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 1)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 2");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Power for 3 turns!";
             pstat.PowerU = true;
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 2)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 3");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Defense for 3 turns!";
             pstat.DefenseU = true;
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 3)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 4");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player doubled their Speed for 3 turns!";
             pstat.SpeedU = true;
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 4)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 5");BURN
             Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,9);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
             if (Damage <= 1) {Damage = 1;}
-
             ChanceTwo = Random.Range(0,3);
             if (ChanceTwo == 1) {estat.BurningE = true; Chance = 0;}
 
-            estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
             if (ChanceTwo == 1) {UI.text = "The Player burned the Enemy! The Enemy took " + (int) Damage + " Damage from the Fire Attack";}
             if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and burned the Enemy! The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
             if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Fire Attack!";}
-            Debug.Log("Enemy took" + Damage + "damage");
+            
+            yield return new WaitForSeconds(0.75f);
+            estat.Health = estat.Health - (int) Damage;
             Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 5)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 6");FREEZE
             Chance = 50; ChanceTwo = 50;
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,9);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
             if (Damage <= 1) {Damage = 1;}
-
             ChanceTwo = Random.Range(0,3);
             if (ChanceTwo == 1) {estat.FreezeE = true; Chance = 0;}
 
-            estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
             if (ChanceTwo == 1) {UI.text = "The Player froze the Enemy! The Enemy took " + (int) Damage + " Damage from the Ice Attack";}
             if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and froze the Enemy! The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
             if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Ice Attack!";}
-            Debug.Log("Enemy took" + Damage + "damage");
+            
+            yield return new WaitForSeconds(0.75f);
+            estat.Health = estat.Health - (int) Damage;
             Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 6)
         {
             StartCoroutine("AnimatedPlayer");
             Chance = 50; ChanceTwo = 50;
-            //Debug.Log("Player Move 7");DIZZY
             Damage = pstat.Power - estat.Defense/2;
             Chance = Random.Range(0,9);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
             if (Damage <= 1) {Damage = 1;}
-
             ChanceTwo = Random.Range(0,3);
             if (ChanceTwo == 1) {estat.DizzyE = true; Chance = 0;}
 
-            estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
             if (ChanceTwo == 1) {UI.text = "The Player bewildered the Enemy! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack";}
             if (Chance == 1 && ChanceTwo == 1) {UI.text = "Landed a critical hit and bewildered the Enemy! The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
             if (Chance != 1 && ChanceTwo != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Dizzy Attack!";}
-            Debug.Log("Enemy took" + Damage + "damage");
-            Damage = 0; Chance = 50;
+
+            yield return new WaitForSeconds(0.75f);
+            estat.Health = estat.Health - (int) Damage;
+            Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 7)
         {
             StartCoroutine("AnimatedPlayer");
             Chance = 50; ChanceTwo = 50;
-            //Debug.Log("Player Move 8");REDSWORD
             Damage = (pstat.Power - estat.Defense/2) + 3;
             Chance = Random.Range(0,12);
 
             if (Chance == 1) {Damage = Damage * 1.5f; UI.text = "The Enemy took " + Damage + " Damage from the Ice Attack!";; Chance = 0;}
             if (Damage <= 1) {Damage = 1;}
-            estat.Health = estat.Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Player landed a critical hit! The Enemy took " + (int) Damage + " Damage from the Strong Attack!";}
             if (Chance != 1) {UI.text = "The Enemy took " + (int) Damage + " Damage from the Strong Attack!";}
-            Debug.Log("Enemy took" + Damage + "damage");
+
+            yield return new WaitForSeconds(0.75f);
+            estat.Health = estat.Health - (int) Damage;
             Damage = 0;
             Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 8)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 9");
             Chance = 50; ChanceTwo = 50;
             Chance = Random.Range(2,8);
             Health = (int) Health + (int) Chance;
             UI.text = "The Player recovered " + Chance + " Health from Random Heal!";
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
         if (MoveABCD == 9)
         {
             StartCoroutine("AnimatedPlayer");
-            //Debug.Log("Player Move 10");
             Chance = 50; ChanceTwo = 50;
             Health = Health + 5;
             UI.text = "The Player recovered " + 5 + " Health from Consistent Heal!";
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
     }
 
 //ENEMY MOVE SELECTION
-    void EnemyMovePlan()
+    public IEnumerator EnemyMovePlan()
     {
         if (EnemyChoice == 1 || EnemyChoice == 2 || EnemyChoice == 3 || EnemyChoice == 4)
         {
             StartCoroutine("AnimatedEnemy");
-            //Debug.Log("Enemy Move 1");
             Chance = 50; ChanceTwo = 50;
             Damage = estat.Power - pstat.Defense/2;
             Chance = Random.Range(0,12);
 
             if (Chance == 1) {Damage = Damage * 1.5f; Debug.Log("A critical hit!"); Chance = 0;}
             if (Damage <= 1) {Damage = 1;}
-            Health = Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Enemy landed a critical hit! The Player took " + (int) Damage + " Damage from the Enemy Attack!";}
             if (Chance != 1) {UI.text = "The Player took " + (int) Damage + " Damage from the Enemy Attack!";}
-            Debug.Log("Player took" + Damage + "damage");
+
+            yield return new WaitForSeconds(0.75f);
+            Health = Health - (int) Damage;
             Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 5)
@@ -541,8 +538,9 @@ public class BattleManager : MonoBehaviour
             StartCoroutine("AnimatedEnemy");
             Chance = 50;
             UI.text = "The Player had their Power cut in half by the Enemy's curse, lasting for 3 turns!";
-            Debug.Log("Enemy lowered Player Power");
+
             pstat.PowerD = true;
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 6)
@@ -550,8 +548,9 @@ public class BattleManager : MonoBehaviour
             StartCoroutine("AnimatedEnemy");
             Chance = 50;
             UI.text = "The Player had their Defense cut in half by the Enemy's curse, lasting for 3 turns!";
-            Debug.Log("Enemy lowered Player Defense");
+
             pstat.DefenseD = true;
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 7)
@@ -559,23 +558,23 @@ public class BattleManager : MonoBehaviour
             StartCoroutine("AnimatedEnemy");
             Chance = 50; ChanceTwo = 50;
             UI.text = "The Player had their Speed cut in half by the Enemy's curse, lasting for 3 turns!";
-            Debug.Log("Enemy lowered Player Speed");
+
             pstat.SpeedD = true;
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 8)
         {
             StartCoroutine("AnimatedEnemy");
             Chance = 50; ChanceTwo = 50;
-            Debug.Log("Defense Ignorant Move");
+
             Damage = estat.Power - pstat.Defense/3;
             if (Damage <= 1) {Damage = 1;}
-            Health = Health - (int) Damage;
             if (Chance == 1) {UI.text = "The Enemy landed a critical hit! The Player took " + (int) Damage + " Damage from the Enemies Defense Ignorant Attack!";}
             if (Chance != 1) {UI.text = "The Player took " + (int) Damage + " Damage from the Enemies Defense Ignorant Attack!";}
-            Debug.Log("Player took" + Damage + "damage");
-            Damage = 0;
-            Chance = 50; ChanceTwo = 50;
+            yield return new WaitForSeconds(0.75f);
+            Health = Health - (int) Damage;
+            Damage = 0; Chance = 50; ChanceTwo = 50;
         }
         if (EnemyChoice == 9)
         {
@@ -584,7 +583,8 @@ public class BattleManager : MonoBehaviour
             Chance = Random.Range(3,7);
             estat.Health = estat.Health + Chance;
             UI.text = "The Enemy healed themselves by " + Chance + " Health!";
-            Debug.Log("Enemy Move 9");
+
+            yield return new WaitForSeconds(0.75f);
             Chance = 50; ChanceTwo = 50;
         }
     }
@@ -636,6 +636,7 @@ public class BattleManager : MonoBehaviour
         estat.Power += ModP;
         estat.Defense += ModD;
         estat.Speed += ModS;
+        estat.HealthMax = Health + HBuff;
         estat.Health += HBuff;
         estat.RoundRefresh = true;
         MenuStart();
@@ -762,7 +763,7 @@ public class BattleManager : MonoBehaviour
         //if (Chance == 1) {ModD += 1;}
         //if (Chance == 2) {ModS += 1;}
         yield return new WaitForSeconds(0.05f);
-        HBuff += 1;
+        HBuff = HBuff + 1;
         pstat.ResetBool = true;
         MenuSelect = false;
         yield return new WaitForSeconds(0.15f);

@@ -13,6 +13,7 @@ public class EnemyStats : MonoBehaviour
     public float BASESpeed;
 
     public float Health;
+    public float HealthMax;
     public bool EnemyDefeat;
 
     public int EnemyMoveA;
@@ -44,7 +45,9 @@ public class EnemyStats : MonoBehaviour
         EnemyMoveA = Random.Range(1,4);
         EnemyMoveB = Random.Range(5,8);
         EnemyMoveC = Random.Range(8,10);
+
         Refresh();
+        Health = HealthMax;
     }
 
     void Update()
@@ -82,5 +85,7 @@ public class EnemyStats : MonoBehaviour
         Power = BASEPower / Dizzy;
         Defense = BASEDefense / Burning;
         Speed = BASESpeed / Freeze;
+
+        if (Health >= HealthMax) {Health = HealthMax;}
     }
 }
