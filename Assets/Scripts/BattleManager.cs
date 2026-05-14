@@ -339,12 +339,12 @@ public class BattleManager : MonoBehaviour
         if (Defeat == true)
         {
             BattleEnd = true;
+            Defeat = false;
             Instantiate(Backgrounds[5], transform);
             UI.text = "The Player has been defeated!";
             Debug.Log("Player loses the fight");
             yield return new WaitForSeconds(2f);
             GameOver();
-            Defeat = false;
         }
     }
     void MenuStart()
@@ -618,8 +618,9 @@ public class BattleManager : MonoBehaviour
     {
         PlushView = true;
         DefeatMenu = true;
-        Instantiate(PlushFront[pstat.PlushChoice], transform); //PROBLEM WITH THIS GUY <<<<<
+        Instantiate(PlushFront[pstat.PlushChoice], new Vector3(0, -1f, 0), Quaternion.identity, transform);
         Instantiate(Backgrounds[2], transform);
+        
     }
     //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
     void Summon()
