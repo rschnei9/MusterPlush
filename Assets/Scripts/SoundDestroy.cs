@@ -15,7 +15,7 @@ public class SoundDestroy : MonoBehaviour
     }
     public IEnumerator Doom()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.3f);
         Destroy(gameObject);
     }
 }

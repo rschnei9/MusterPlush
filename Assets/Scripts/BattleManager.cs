@@ -238,7 +238,7 @@ public class BattleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && MoveSelect == true && MoveABCD == ButtonB && pstat.PlushSelect == false) {ButtonB = ButtonE; MoveSelect = false; StartCoroutine("StatUpgrade");}
         if (Input.GetKeyDown(KeyCode.E) && MoveSelect == true && MoveABCD == ButtonC && pstat.PlushSelect == false) {ButtonC = ButtonE; MoveSelect = false; StartCoroutine("StatUpgrade");}
         if (Input.GetKeyDown(KeyCode.E) && MoveSelect == true && MoveABCD == ButtonD && pstat.PlushSelect == false) {ButtonD = ButtonE; MoveSelect = false; StartCoroutine("StatUpgrade");}
-        if (Input.GetKeyDown(KeyCode.Q) && MoveSelect == true) {Instantiate(Audio[0], transform); MoveSelect = false; StartCoroutine("StatUpgrade");}
+        if (Input.GetKeyDown(KeyCode.Q) && MoveSelect == true) {MoveSelect = false; StartCoroutine("StatUpgrade");}
 
         //STAT UPGRADES WOOHOO!
         if (Input.GetKeyDown(KeyCode.E) && StatSelect == true) {Instantiate(Audio[0], transform); StatSelect = false; pstat.PowerU = false; pstat.DefenseU = false; pstat.SpeedU = false; StartCoroutine("StatConfirmed");}
@@ -843,6 +843,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         if (MoveABCD == 0)
         {
+            Instantiate(Audio[2], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.52f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.55f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
@@ -868,6 +869,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 1)
         {
+            Instantiate(Audio[3], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.6f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.7f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.4f, -2.9f, 0);
@@ -893,6 +895,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 2)
         {
+            Instantiate(Audio[3], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.7f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.9f, 0);
@@ -918,6 +921,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 3)
         {
+            Instantiate(Audio[3], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
@@ -943,6 +947,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 4)
         {
+            Instantiate(Audio[4], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.6f, 0);
@@ -968,6 +973,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 5)
         {
+            Instantiate(Audio[5], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.1f, -2.55f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.3f, -2.55f, 0);
@@ -993,6 +999,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 6)
         {
+            Instantiate(Audio[6], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.4f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.5f, -2.3f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.2f, -2.2f, 0);
@@ -1018,6 +1025,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 7)
         {
+            Instantiate(Audio[7], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0.7f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(-0.3f, -2.55f, 0);
@@ -1043,6 +1051,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 8)
         {
+            Instantiate(Audio[9], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.6f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.7f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.8f, 0);
@@ -1068,6 +1077,7 @@ public class BattleManager : MonoBehaviour
         }
         if (MoveABCD == 9)
         {
+            Instantiate(Audio[9], transform);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.4f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.3f, 0);
             yield return new WaitForSeconds(0.05f); PlayerManager.transform.position = new Vector3(0, -2.2f, 0);
@@ -1097,7 +1107,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         if (EnemyChoice == 1 || EnemyChoice == 2 || EnemyChoice == 3 || EnemyChoice == 4)
         {
-            Debug.Log("Enemy Attack");
+            Instantiate(Audio[2], transform);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.77f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.79f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.81f, 0);
@@ -1123,6 +1133,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 5 || EnemyChoice == 6 || EnemyChoice == 7)
         {
+            Instantiate(Audio[8], transform);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.1f, 2.75f, 0); PlayerManager.transform.position = new Vector3(-01f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(-0.1f, 2.75f, 0); PlayerManager.transform.position = new Vector3(0.1f, -2.5f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0.2f, 2.75f, 0); PlayerManager.transform.position = new Vector3(-0.2f, -2.5f, 0);
@@ -1148,6 +1159,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 8)
         {
+            Instantiate(Audio[7], transform);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.8f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.9f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.8f, 0);
@@ -1173,6 +1185,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemyChoice == 9)
         {
+            Instantiate(Audio[9], transform);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.8f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.9f, 0);
             yield return new WaitForSeconds(0.05f); EnemyManager.transform.position = new Vector3(0, 2.95f, 0);
