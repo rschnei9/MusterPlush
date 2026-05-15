@@ -52,7 +52,7 @@ public class PlayerStats : MonoBehaviour
     {
         PlushChoice = 0; BASEPower = 6; BASEDefense = 2; BASESpeed = 8;
         Refresh();
-        PlushSelect = true;
+        PlushSelect = false;
     }
 
     void Update()

@@ -1,16 +1,21 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class SoundDestroy : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartCoroutine("Doom");
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+    public IEnumerator Doom()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 }

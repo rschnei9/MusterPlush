@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour
 
     private PlayerStats pstat;
     private EnemyStats estat;
+    public AudioManager a;
     public PlushRead plush;
 
     public GameObject PlayerManager;
@@ -80,6 +81,7 @@ public class BattleManager : MonoBehaviour
     public GameObject[] UIBlock;
     public GameObject[] Condition;
     public GameObject[] Backgrounds;
+    public GameObject[] Audio;
 
     public TextMeshProUGUI TopUI;
     public TextMeshProUGUI StatUI;
@@ -126,7 +128,7 @@ public class BattleManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && DefeatMenu == true)
         {
-            StartCoroutine("UnLoading");
+            Instantiate(Audio[0], transform); StartCoroutine("UnLoading");
         }
         //Statistic Updates UI
         PowerUI.text =  "" + pstat.Power;
@@ -178,7 +180,7 @@ public class BattleManager : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.T)) {Instantiate(Screens[0], transform);}
 
         //PLUSH SELECTION FUNCTIONS
-        if (Input.GetKeyDown(KeyCode.E) && pstat.PlushSelect == true) {Instantiate(Backgrounds[5], transform); pstat.PlushSelect = false; MenuSelect = false; StartCoroutine("Starting");}
+        if (Input.GetKeyDown(KeyCode.E) && pstat.PlushSelect == true) {Instantiate(Audio[0], transform); Instantiate(Backgrounds[5], transform); pstat.PlushSelect = false; MenuSelect = false; StartCoroutine("Starting");}
         if (pstat.PlushSelect == true) {Chance = 0 + pstat.PlushChoice;}
 
         if (pstat.PlushSelect == true && Chance == 0) {UI.text = "Cat Plush! When you start, you won't be able to switch to a different plush until defeat!";}
@@ -189,20 +191,25 @@ public class BattleManager : MonoBehaviour
         hm.UpdateHearts(Health);
 
         //MOVE SLIDER UI
+            if (Input.GetKeyDown(KeyCode.D) && pstat.PlushSelect == true)
+                {Instantiate(Audio[1], transform);}
+            if (Input.GetKeyDown(KeyCode.A) && pstat.PlushSelect == true)
+                {Instantiate(Audio[1], transform);}
+
             if (Input.GetKeyDown(KeyCode.D) && MenuSelect == true && MenuSummon == true)
-                {SelectMoveR();}
+                {Instantiate(Audio[1], transform); SelectMoveR();}
             if (Input.GetKeyDown(KeyCode.A) && MenuSelect == true && MenuSummon == true)
-                {SelectMoveL();}
+                {Instantiate(Audio[1], transform); SelectMoveL();}
 
             if (Input.GetKeyDown(KeyCode.D) && MoveSelect == true)
-                {SelectMoveR();}
+                {Instantiate(Audio[1], transform); SelectMoveR();}
             if (Input.GetKeyDown(KeyCode.A) && MoveSelect == true)
-                {SelectMoveL();}
+                {Instantiate(Audio[1], transform); SelectMoveL();}
 
             if (Input.GetKeyDown(KeyCode.D) && StatSelect == true)
-                {SelectStatR();}
+                {Instantiate(Audio[1], transform); SelectStatR();}
             if (Input.GetKeyDown(KeyCode.A) && StatSelect == true)
-                {SelectStatL();}
+                {Instantiate(Audio[1], transform); SelectStatL();}
             
             if (pstat.PlushRoll == true)
             {
@@ -223,21 +230,18 @@ public class BattleManager : MonoBehaviour
             }
             
         //MOVE SELECTION
-        if (Input.GetKeyDown(KeyCode.E) && MenuSelect == true && Defeat == false && pstat.PlushSelect == false && estat.EnemyDefeat == false)
-        {
-            MenuSelect = false;
-            StartCoroutine("TurnStart");
-        }
+        if (Input.GetKeyDown(KeyCode.E) && MenuSummon == true && MenuSelect == true && Defeat == false && pstat.PlushSelect == false && estat.EnemyDefeat == false)
+        {MenuSelect = false; StartCoroutine("TurnStart"); Instantiate(Audio[0], transform);}
+
         //MOVE OVERRIDE WITH NEW
         if (Input.GetKeyDown(KeyCode.E) && MoveSelect == true && MoveABCD == ButtonA && pstat.PlushSelect == false) {ButtonA = ButtonE; MoveSelect = false; StartCoroutine("StatUpgrade");}
         if (Input.GetKeyDown(KeyCode.E) && MoveSelect == true && MoveABCD == ButtonB && pstat.PlushSelect == false) {ButtonB = ButtonE; MoveSelect = false; StartCoroutine("StatUpgrade");}
         if (Input.GetKeyDown(KeyCode.E) && MoveSelect == true && MoveABCD == ButtonC && pstat.PlushSelect == false) {ButtonC = ButtonE; MoveSelect = false; StartCoroutine("StatUpgrade");}
         if (Input.GetKeyDown(KeyCode.E) && MoveSelect == true && MoveABCD == ButtonD && pstat.PlushSelect == false) {ButtonD = ButtonE; MoveSelect = false; StartCoroutine("StatUpgrade");}
-        
-        if (Input.GetKeyDown(KeyCode.Q) && MoveSelect == true) {MoveSelect = false; StartCoroutine("StatUpgrade");}
+        if (Input.GetKeyDown(KeyCode.Q) && MoveSelect == true) {Instantiate(Audio[0], transform); MoveSelect = false; StartCoroutine("StatUpgrade");}
 
         //STAT UPGRADES WOOHOO!
-        if (Input.GetKeyDown(KeyCode.E) && StatSelect == true) {StatSelect = false; pstat.PowerU = false; pstat.DefenseU = false; pstat.SpeedU = false; StartCoroutine("StatConfirmed");}
+        if (Input.GetKeyDown(KeyCode.E) && StatSelect == true) {Instantiate(Audio[0], transform); StatSelect = false; pstat.PowerU = false; pstat.DefenseU = false; pstat.SpeedU = false; StartCoroutine("StatConfirmed");}
     }
 
     //THIS IS THE TURN CALCULATOR, DETERMINING WHO MOVES FIRST AND SECOND.
@@ -611,15 +615,17 @@ public class BattleManager : MonoBehaviour
     void GainingMove()
     {
         if (MoveSelect == false)
-        {Destruction(); MenuSelect = true; MoveSummon();}
+        {Destruction(); a.Destroyer= true; MenuSelect = true; MoveSummon();}
     }
     //DOOM, MUAHAHAHAHHAHAHA!
     void GameOver()
     {
+        a.Destroyer = true;
         PlushView = true;
         DefeatMenu = true;
         Instantiate(PlushFront[pstat.PlushChoice], new Vector3(0, -1f, 0), Quaternion.identity, transform);
         Instantiate(Backgrounds[2], transform);
+        a.DefeatOn = true;
         
     }
     //THIS IS FOR SUMMONING BATTLE UI AND TAKING IT DOWN
@@ -635,6 +641,7 @@ public class BattleManager : MonoBehaviour
         }}}}}}
         Instantiate(Backgrounds[0], transform);
         Instantiate(Backgrounds[6], transform);
+        a.BattleOn = true;
         MenuSummon = true;
         pstat.PlushSelect = false;
         BattleEnd = false;
@@ -700,7 +707,9 @@ public class BattleManager : MonoBehaviour
     }
     void StartingSummon()
     {
+        pstat.PlushSelect = true;
         PlushView = true;
+        a.ChillOn = true;
         StatUI.text = "Plush Select";
         Instantiate(PlushFront[pstat.PlushChoice], transform); //PROBLEM WITH THIS GUY <<<<<
         Instantiate(Backgrounds[6], transform);
@@ -712,9 +721,10 @@ public class BattleManager : MonoBehaviour
         Instantiate(UIBlock[2], transform);
     }
     public IEnumerator Starting()
-    {yield return new WaitForSeconds(1.5f); Destruction(); StatUI.text = ""; MenuSelect = true; Summon();}
+    {yield return new WaitForSeconds(1.5f); Destruction(); a.Destroyer = true; StatUI.text = ""; MenuSelect = true; Summon();}
     void MoveSummon()
     {
+        a.ChillOn = true;
         Instantiate(Backgrounds[6], transform);
         ButtonE = Random.Range(1,10);
         if (ButtonE == ButtonA || ButtonE == ButtonB || ButtonE == ButtonC || ButtonE == ButtonD) {ButtonE = Random.Range(1,10);}
@@ -758,6 +768,7 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.15f);
         Destruction();
+        Instantiate(Audio[0], transform);
         MoveUI.text = "";
         TopUI.text = "(A) Left (D) Right. Choose Power, Defense, or Speed, then press (E).";
         UI.text = "Gain a +2 boost to a stat of your choice. A random stat will be selected to gain +1.";
